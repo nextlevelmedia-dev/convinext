@@ -1,0 +1,180 @@
+.nlm-coverflow {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1600px;
+}
+
+.nlm-track {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  transform-style: preserve-3d;
+}
+
+.nlm-slide {
+  position: absolute;
+  transition: transform 0.9s cubic-bezier(0.25, 1, 0.3, 1);
+  will-change: transform;
+  opacity: 1;
+}
+
+.nlm-card {
+  width: 300px;
+  height: 420px;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(200, 200, 200, 0.4);
+  color: #111;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.nlm-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.nlm-card h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.nlm-card h4 {
+  margin: 6px 0 0;
+  font-size: 0.6rem;
+  color: #666;
+}
+
+.nlm-card p {
+  font-size: 16px;
+  line-height: 1.4;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #444;
+  flex: 1;
+}
+
+.nlm-card-btn {
+  display: inline-block;
+  margin-top: auto;
+  background: linear-gradient(90deg, #f81ce5, #00c6ff);
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+}
+
+.nlm-card-btn:hover {
+  transform: scale(1.05);
+}
+
+.nlm-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #000;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 20;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  transition: background 0.3s;
+}
+
+.nlm-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #000;
+}
+
+.nlm-btn.prev {
+  left: 10px;
+}
+
+.nlm-btn.next {
+  right: 10px;
+}
+
+@media (max-width: 600px) {
+  .nlm-coverflow {
+    height: 330px;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .nlm-track {
+    height: 260px;
+    transform: translateX(-15px);
+  }
+
+  .nlm-slide {
+    height: 260px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .nlm-card {
+    width: 230px;
+    height: 350px;
+    padding: 18px 22px;
+    transform-origin: center top;
+  }
+
+  .nlm-card img {
+    height: 155px;
+  }
+
+  .nlm-card h3 {
+    font-size: 1.6rem;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  .nlm-card h4 {
+    font-size: 0.7rem;
+    line-height: 1.35;
+    margin: 0 0 8px;
+    padding: 0 4px;
+  }
+
+  .nlm-card p {
+    display: none;
+  }
+
+  .nlm-card-btn {
+    margin-top: 20px;
+  }
+
+  .nlm-btn.prev,
+  .nlm-btn.next {
+    display: none;
+  }
+}
