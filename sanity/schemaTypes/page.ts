@@ -9,43 +9,32 @@ export const pageType = defineType({
     {
       name: "heroSection",
       title: "🚀 Hero Section",
-      options: {
-        collapsible: true,
-        collapsed: false,
-      },
+      options: { collapsible: true, collapsed: false },
     },
     {
       name: "homeProjectsSection",
       title: "🎠 Home - Sezione Progetti",
-      options: {
-        collapsible: true,
-        collapsed: false,
-      },
+      options: { collapsible: true, collapsed: false },
     },
     {
       name: "logoMarqueeSection",
       title: "🏷️ Sezione Loghi Clienti",
-      options: {
-        collapsible: true,
-        collapsed: false,
-      },
+      options: { collapsible: true, collapsed: false },
+    },
+    {
+      name: "teamCardsSection",
+      title: "👥 Sezione Team/Cards",
+      options: { collapsible: true, collapsed: false },
     },
   ],
 
   fields: [
-    defineField({
-      name: "title",
-      title: "Titolo pagina",
-      type: "string",
-    }),
-
+    defineField({ name: "title", title: "Titolo pagina", type: "string" }),
     defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
-      options: {
-        source: "title",
-      },
+      options: { source: "title" },
     }),
 
     defineField({
@@ -112,11 +101,7 @@ export const pageType = defineType({
       fieldset: "logoMarqueeSection",
       hidden: ({ document }) => document?.slug?.current !== "home",
       fields: [
-        defineField({
-          name: "title",
-          title: "Titolo sezione",
-          type: "string",
-        }),
+        defineField({ name: "title", title: "Titolo sezione", type: "string" }),
         defineField({
           name: "subtitle",
           title: "Sottotitolo",
@@ -145,9 +130,7 @@ export const pageType = defineType({
                 defineField({ name: "logo", title: "Logo", type: "image", options: { hotspot: true } }),
                 defineField({ name: "alt", title: "Nome azienda", type: "string" }),
               ],
-              preview: {
-                select: { title: "alt", media: "logo" },
-              },
+              preview: { select: { title: "alt", media: "logo" } },
             },
           ],
         }),
@@ -162,8 +145,53 @@ export const pageType = defineType({
                 defineField({ name: "logo", title: "Logo", type: "image", options: { hotspot: true } }),
                 defineField({ name: "alt", title: "Nome azienda", type: "string" }),
               ],
+              preview: { select: { title: "alt", media: "logo" } },
+            },
+          ],
+        }),
+      ],
+    }),
+
+    defineField({
+      name: "teamCards",
+      title: "Sezione Team Cards",
+      type: "object",
+      fieldset: "teamCardsSection",
+      hidden: ({ document }) => document?.slug?.current !== "home",
+      fields: [
+        defineField({ name: "titleHighlight", title: "Titolo - parte evidenziata", type: "string" }),
+        defineField({ name: "titleNormal", title: "Titolo - parte normale", type: "string" }),
+        defineField({
+          name: "subtitle",
+          title: "Sottotitolo",
+          type: "array",
+          of: [
+            {
+              type: "block",
+              styles: [{ title: "Normal", value: "normal" }],
+              marks: {
+                decorators: [
+                  { title: "Bold", value: "strong" },
+                  { title: "Italic", value: "em" },
+                ],
+              },
+            },
+          ],
+        }),
+        defineField({
+          name: "cards",
+          title: "Card",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({ name: "title", title: "Titolo card", type: "string" }),
+                defineField({ name: "description", title: "Descrizione", type: "text" }),
+                defineField({ name: "lottieFile", title: "Nome file Lottie (es: Work-Chat.json)", type: "string" }),
+              ],
               preview: {
-                select: { title: "alt", media: "logo" },
+                select: { title: "title" },
               },
             },
           ],

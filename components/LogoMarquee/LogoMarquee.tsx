@@ -55,7 +55,7 @@ export default function LogoMarquee({ title, subtitle, logosRowOne, logosRowTwo 
   if (!rowOne.length && !rowTwo.length) return null
 
   return (
-    <section className="bg-white py-24 overflow-hidden">
+    <section className=" py-24 overflow-hidden">
       <div className="mx-auto max-w-2xl px-6 text-center text-slate-950 mb-16">
         {title && (
           <h2 className="text-4xl font-black leading-[1.2] tracking-tight md:text-[42px]">

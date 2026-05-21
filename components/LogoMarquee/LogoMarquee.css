@@ -35,10 +35,10 @@
 
 .marquee-fade::before {
   left: 0;
-  background: linear-gradient(to right, white, transparent);
+  background: linear-gradient(to right, transparent, transparent);
 }
 
 .marquee-fade::after {
   right: 0;
-  background: linear-gradient(to left, white, transparent);
+  background: linear-gradient(to left, transparent, transparent);
 }
