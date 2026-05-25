@@ -72,6 +72,7 @@ header a.cta-bubble,
   color: #171717;
 }
 
+
 /* DARK MODE body e main */
 .dark body {
   background: #080808;
@@ -118,6 +119,33 @@ header a.cta-bubble,
 /* stack-title span usa gradient — non toccare */
 .dark .main-bg .stack-card .stack-title span {
   color: transparent;
+}
+
+/* Banda statistiche hero — sempre chiara, immune al dark mode */
+.hero-stats {
+  background-color: #f2f2f2 !important;
+}
+
+.dark .hero-stats h1,
+.dark .hero-stats h2,
+.dark .hero-stats h3,
+.dark .hero-stats h4,
+.dark .hero-stats p {
+  color: #64748b !important;
+}
+
+.dark .hero-stats span:not([class*="bg-brand"]) {
+  color: #64748b !important;
+}
+
+.dark .hero-stats span[class*="bg-brand"],
+.dark .hero-stats p[class*="bg-brand"] {
+  color: transparent !important;
+}
+
+/* Reviews title — segue dark mode */
+.dark .reviews-title {
+  color: #ffffff !important;
 }
 
 /* =========================

@@ -12,8 +12,23 @@ export const pageType = defineType({
       options: { collapsible: true, collapsed: false },
     },
     {
+      name: "impactSection",
+      title: "💥 Sezione Impact (Ecommerce / Siti Web)",
+      options: { collapsible: true, collapsed: false },
+    },
+    {
+      name: "mockupMarqueeSection",
+      title: "🖥️ Mockup Marquee (Ecommerce / Siti Web)",
+      options: { collapsible: true, collapsed: false },
+    },
+    {
       name: "reviewsSection",
       title: "⭐ Sezione Recensioni",
+      options: { collapsible: true, collapsed: false },
+    },
+    {
+      name: "valuePropsSection",
+      title: "🎯 Value Propositions",
       options: { collapsible: true, collapsed: false },
     },
     {
@@ -24,11 +39,6 @@ export const pageType = defineType({
     {
       name: "vantaggioUnicoSection",
       title: "💡 Vantaggio Unico",
-      options: { collapsible: true, collapsed: false },
-    },
-    {
-      name: "valuePropsSection",
-      title: "🎯 Value Propositions",
       options: { collapsible: true, collapsed: false },
     },
     {
@@ -100,6 +110,58 @@ export const pageType = defineType({
       ],
     }),
 
+    // IMPACT SECTION
+    defineField({
+      name: "impactSection",
+      title: "Sezione Impact",
+      type: "object",
+      fieldset: "impactSection",
+      hidden: ({ document }) => document?.slug?.current === "home",
+      fields: [
+        defineField({ name: "titleHighlight", title: "Titolo - parte evidenziata (gradient)", type: "string" }),
+        defineField({ name: "titleNormal", title: "Titolo - parte normale", type: "string" }),
+        defineField({ name: "subtitle", title: "Sottotitolo", type: "text", rows: 3 }),
+        defineField({ name: "impactText", title: "Testo impact grande (es: CRO)", type: "string" }),
+      ],
+    }),
+
+    // MOCKUP MARQUEE
+    defineField({
+      name: "mockupMarquee",
+      title: "Mockup Marquee",
+      type: "object",
+      fieldset: "mockupMarqueeSection",
+      hidden: ({ document }) => document?.slug?.current === "home",
+      fields: [
+        defineField({
+          name: "rowOne",
+          title: "Riga 1 (va a destra →)",
+          type: "array",
+          of: [{
+            type: "object",
+            fields: [
+              defineField({ name: "image", title: "Screenshot mockup", type: "image", options: { hotspot: true } }),
+              defineField({ name: "alt", title: "Nome progetto", type: "string" }),
+            ],
+            preview: { select: { title: "alt", media: "image" } },
+          }],
+        }),
+        defineField({
+          name: "rowTwo",
+          title: "Riga 2 (va a sinistra ←)",
+          type: "array",
+          of: [{
+            type: "object",
+            fields: [
+              defineField({ name: "image", title: "Screenshot mockup", type: "image", options: { hotspot: true } }),
+              defineField({ name: "alt", title: "Nome progetto", type: "string" }),
+            ],
+            preview: { select: { title: "alt", media: "image" } },
+          }],
+        }),
+      ],
+    }),
+
     // REVIEWS
     defineField({
       name: "reviews",
@@ -153,6 +215,47 @@ export const pageType = defineType({
             },
           ],
         }),
+      ],
+    }),
+
+    // VALUE PROPS
+    defineField({
+      name: "valueProps",
+      title: "Value Propositions",
+      type: "array",
+      fieldset: "valuePropsSection",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "label", title: "Label (es: DREAM OUTCOME)", type: "string" }),
+            defineField({ name: "titleHighlight", title: "Titolo - parte evidenziata (gradient)", type: "string" }),
+            defineField({ name: "titleNormal", title: "Titolo - parte normale", type: "string" }),
+            defineField({ name: "subtitle", title: "Paragrafo", type: "text", rows: 3 }),
+            defineField({ name: "ctaText", title: "Testo CTA", type: "string" }),
+            defineField({ name: "ctaHref", title: "Link CTA", type: "string" }),
+            defineField({
+              name: "mediaType",
+              title: "Tipo di media",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Immagine", value: "image" },
+                  { title: "Video", value: "video" },
+                  { title: "Lottie", value: "lottie" },
+                ],
+                layout: "radio",
+              },
+            }),
+            defineField({ name: "image", title: "Immagine", type: "image", options: { hotspot: true } }),
+            defineField({ name: "videoWebm", title: "Video .webm (URL)", type: "url" }),
+            defineField({ name: "videoMp4", title: "Video .mp4 (URL)", type: "url" }),
+            defineField({ name: "lottieFile", title: "Nome file Lottie (es: Work-Chat.json)", type: "string" }),
+          ],
+          preview: {
+            select: { title: "titleNormal", subtitle: "label", media: "image" },
+          },
+        },
       ],
     }),
 
@@ -212,47 +315,6 @@ export const pageType = defineType({
         defineField({ name: "subtitle", title: "Sottotitolo / Paragrafo", type: "text", rows: 4 }),
         defineField({ name: "ctaText", title: "Testo CTA", type: "string" }),
         defineField({ name: "ctaHref", title: "Link CTA (es: /contatti)", type: "string" }),
-      ],
-    }),
-
-    // VALUE PROPS
-    defineField({
-      name: "valueProps",
-      title: "Value Propositions",
-      type: "array",
-      fieldset: "valuePropsSection",
-      of: [
-        {
-          type: "object",
-          fields: [
-            defineField({ name: "label", title: "Label (es: DREAM OUTCOME)", type: "string" }),
-            defineField({ name: "titleHighlight", title: "Titolo - parte evidenziata (gradient)", type: "string" }),
-            defineField({ name: "titleNormal", title: "Titolo - parte normale", type: "string" }),
-            defineField({ name: "subtitle", title: "Paragrafo", type: "text", rows: 3 }),
-            defineField({ name: "ctaText", title: "Testo CTA", type: "string" }),
-            defineField({ name: "ctaHref", title: "Link CTA", type: "string" }),
-            defineField({
-              name: "mediaType",
-              title: "Tipo di media",
-              type: "string",
-              options: {
-                list: [
-                  { title: "Immagine", value: "image" },
-                  { title: "Video", value: "video" },
-                  { title: "Lottie", value: "lottie" },
-                ],
-                layout: "radio",
-              },
-            }),
-            defineField({ name: "image", title: "Immagine", type: "image", options: { hotspot: true } }),
-            defineField({ name: "videoWebm", title: "Video .webm (URL)", type: "url" }),
-            defineField({ name: "videoMp4", title: "Video .mp4 (URL)", type: "url" }),
-            defineField({ name: "lottieFile", title: "Nome file Lottie (es: Work-Chat.json)", type: "string" }),
-          ],
-          preview: {
-            select: { title: "titleNormal", subtitle: "label", media: "image" },
-          },
-        },
       ],
     }),
 

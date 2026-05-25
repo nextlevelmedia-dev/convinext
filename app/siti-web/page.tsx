@@ -1,7 +1,10 @@
 import Header from "@/components/Header"
 import Hero from "@/components/Hero"
 import DeviceMockups from "@/components/DeviceMockups/DeviceMockups"
-
+import ImpactSection from "@/components/ImpactSection/ImpactSection"
+import MockupMarquee from "@/components/MockupMarquee/MockupMarquee"
+import ReviewsSection from "@/components/ReviewsSection/ReviewsSection"
+import ValueProps from "@/components/ValueProps/ValueProps"
 import { client } from "@/sanity/lib/client"
 
 const sitiWebSlides = [
@@ -29,7 +32,47 @@ const sitiWebSlides = [
 
 async function getPageData() {
   const query = `*[_type == "page" && slug.current == "siti-web"][0]{
-    hero
+    hero,
+    impactSection{
+      titleHighlight,
+      titleNormal,
+      subtitle,
+      impactText
+    },
+    mockupMarquee{
+      rowOne[]{ image{ asset->{ _id, url } }, alt },
+      rowTwo[]{ image{ asset->{ _id, url } }, alt }
+    },
+    reviews{
+      titleHighlight,
+      titleNormal,
+      ctaText,
+      ctaHref,
+      socialProofText,
+      socialProofAvatars[]{ photo{ asset->{ _id, url } } },
+      items[]{
+        stars,
+        reviewTitle,
+        reviewText,
+        authorName,
+        authorRole,
+        authorPhoto{ asset->{ _id, url } },
+        companyLogo{ asset->{ _id, url } }
+      }
+    },
+    valueProps[]{
+      label,
+      titleHighlight,
+      titleNormal,
+      subtitle,
+      ctaText,
+      ctaHref,
+      mediaType,
+      image{ asset->{ _id, url } },
+      videoWebm,
+      videoMp4,
+      lottieFile
+    }
   }`
 
   return client.fetch(query)
@@ -41,7 +84,6 @@ export default async function SitiWebPage() {
   return (
     <>
       <Header />
-
       <main>
         <Hero
           eyebrow={data.hero.eyebrow}
@@ -51,10 +93,32 @@ export default async function SitiWebPage() {
           highlightTwo={data.hero.highlightTwo}
           subtitle={data.hero.subtitle}
           ctaText={data.hero.ctaText}
-          rightContent={
-            <DeviceMockups slides={sitiWebSlides} />
-          }
+          rightContent={<DeviceMockups slides={sitiWebSlides} />}
         />
+
+        <ImpactSection
+          titleHighlight={data?.impactSection?.titleHighlight}
+          titleNormal={data?.impactSection?.titleNormal}
+          subtitle={data?.impactSection?.subtitle}
+          impactText={data?.impactSection?.impactText}
+        />
+
+        <MockupMarquee
+          rowOne={data?.mockupMarquee?.rowOne}
+          rowTwo={data?.mockupMarquee?.rowTwo}
+        />
+
+        <ReviewsSection
+          titleHighlight={data?.reviews?.titleHighlight}
+          titleNormal={data?.reviews?.titleNormal}
+          items={data?.reviews?.items}
+          ctaText={data?.reviews?.ctaText}
+          ctaHref={data?.reviews?.ctaHref}
+          socialProofText={data?.reviews?.socialProofText}
+          socialProofAvatars={data?.reviews?.socialProofAvatars}
+        />
+
+        <ValueProps items={data?.valueProps} />
       </main>
     </>
   )

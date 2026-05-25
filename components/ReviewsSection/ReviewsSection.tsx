@@ -150,8 +150,11 @@ export default function ReviewsSection({
       <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px" }}>
 
         {(titleHighlight || titleNormal) && (
-          <div className="text-center mb-12 pb-4 max-w-3xl mx-auto">
-            <h2 style={{ fontSize: "clamp(32px, 4vw, 42px)", fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1.2, color: "#0f172a" }}>
+          <div className="text-center mb-12 pb-4 max-w-2xl mx-auto">
+            <h2
+              className="reviews-title"
+              style={{ fontSize: "clamp(32px, 4vw, 42px)", fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1.2, color: "#0f172a" }}
+            >
               {titleHighlight && (
                 <span style={{
                   background: "linear-gradient(to right, #fc03b0, #047cf9)",

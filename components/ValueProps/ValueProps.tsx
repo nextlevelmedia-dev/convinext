@@ -39,8 +39,8 @@ function MediaBlock({ item }: { item: ValuePropItem }) {
   if (item.mediaType === "lottie" && item.lottieFile) {
     const lottieData = require(`../../public/lotties/${item.lottieFile}`)
     return (
-      <div className="w-full rounded-2xl overflow-hidden aspect-video flex items-center justify-center p-8">
-        <Lottie animationData={lottieData} loop />
+      <div className="w-full rounded-2xl aspect-video flex items-center justify-center overflow-hidden">
+        <Lottie animationData={lottieData} loop style={{ width: "100%", height: "100%" }} />
       </div>
     )
   }
@@ -77,20 +77,28 @@ function ValuePropRow({ item, index }: { item: ValuePropItem; index: number }) {
       </div>
       <div className="w-full md:w-1/2">
         {item.label && (
-          <p style={{ color: "#94a3b8", fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "12px" }}>{item.label}</p>
+          <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "12px" }}>
+            {item.label}
+          </p>
         )}
         {(item.titleHighlight || item.titleNormal) && (
-          <h3 className="text-3xl font-black leading-[1.2] tracking-tight text-slate-950 dark:text-white md:text-4xl mb-4">
-            {item.titleHighlight && <span className="bg-brand-gradient bg-clip-text text-transparent">{item.titleHighlight}</span>}
+          <h3 className="text-3xl font-black leading-[1.2] tracking-tight text-white md:text-4xl mb-4">
+            {item.titleHighlight && (
+              <span className="bg-brand-gradient bg-clip-text text-transparent">{item.titleHighlight}</span>
+            )}
             {item.titleHighlight && item.titleNormal && " "}
             {item.titleNormal}
           </h3>
         )}
         {item.subtitle && (
-          <p className="text-base leading-7 text-slate-600 dark:text-slate-300 mb-8">{item.subtitle}</p>
+          <p className="text-base leading-7 mb-8" style={{ color: "rgba(255,255,255,0.7)" }}>
+            {item.subtitle}
+          </p>
         )}
         {item.ctaText && (
-          <a href={link} style={{ color: "#ffffff", display: "inline-flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(to right, #fc03b0, #047cf9)", padding: "12px 32px", borderRadius: "999px", fontWeight: 700, fontSize: "14px", textDecoration: "none", boxShadow: "0 8px 32px rgba(252,3,176,0.25)", cursor: "pointer" }}>{item.ctaText}</a>
+          <a href={link} style={{ color: "#ffffff", display: "inline-flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(to right, #fc03b0, #047cf9)", padding: "12px 32px", borderRadius: "999px", fontWeight: 700, fontSize: "14px", textDecoration: "none", boxShadow: "0 8px 32px rgba(252,3,176,0.25)", cursor: "pointer" }}>
+            {item.ctaText}
+          </a>
         )}
       </div>
     </div>
@@ -101,7 +109,7 @@ export default function ValueProps({ items }: ValuePropsProps) {
   if (!items?.length) return null
 
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-6" style={{ backgroundColor: "#0f1f3d" }}>
       <div className="mx-auto max-w-6xl flex flex-col gap-24">
         {items.map((item, i) => (
           <ValuePropRow key={i} item={item} index={i} />
