@@ -111,8 +111,8 @@
   color: #000;
 }
 
-.nlm-btn.prev { left: 10px; }
-.nlm-btn.next { right: 10px; }
+.nlm-btn.prev { left: 0; transition: left 0.1s linear; }
+.nlm-btn.next { right: 0; transition: right 0.1s linear; }
 
 @media (max-width: 600px) {
   .nlm-coverflow {
@@ -173,3 +173,4 @@
     display: none;
   }
 }
+

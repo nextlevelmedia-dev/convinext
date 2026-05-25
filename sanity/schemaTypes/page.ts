@@ -12,13 +12,33 @@ export const pageType = defineType({
       options: { collapsible: true, collapsed: false },
     },
     {
-      name: "homeProjectsSection",
-      title: "🎠 Home - Sezione Progetti",
+      name: "reviewsSection",
+      title: "⭐ Sezione Recensioni",
       options: { collapsible: true, collapsed: false },
     },
     {
       name: "logoMarqueeSection",
       title: "🏷️ Sezione Loghi Clienti",
+      options: { collapsible: true, collapsed: false },
+    },
+    {
+      name: "vantaggioUnicoSection",
+      title: "💡 Vantaggio Unico",
+      options: { collapsible: true, collapsed: false },
+    },
+    {
+      name: "valuePropsSection",
+      title: "🎯 Value Propositions",
+      options: { collapsible: true, collapsed: false },
+    },
+    {
+      name: "homeProjectsSection",
+      title: "🎠 Home - Sezione Progetti",
+      options: { collapsible: true, collapsed: false },
+    },
+    {
+      name: "stickyServicesSection",
+      title: "📦 Sezione Servizi (Sticky)",
       options: { collapsible: true, collapsed: false },
     },
     {
@@ -37,6 +57,7 @@ export const pageType = defineType({
       options: { source: "title" },
     }),
 
+    // HERO
     defineField({
       name: "hero",
       title: "Hero content",
@@ -79,21 +100,63 @@ export const pageType = defineType({
       ],
     }),
 
+    // REVIEWS
     defineField({
-      name: "homeProjects",
-      title: "Sezione progetti Home",
-      description: "Compila questo campo solo nella pagina Home.",
+      name: "reviews",
+      title: "Sezione Recensioni",
       type: "object",
-      fieldset: "homeProjectsSection",
-      hidden: ({ document }) => document?.slug?.current !== "home",
+      fieldset: "reviewsSection",
       fields: [
-        defineField({ name: "title", title: "Titolo - prima parte", type: "string" }),
-        defineField({ name: "highlight", title: "Parola evidenziata", type: "string" }),
-        defineField({ name: "titleTwo", title: "Titolo - seconda parte", type: "string" }),
-        defineField({ name: "subtitle", title: "Sottotitolo", type: "text" }),
+        defineField({ name: "titleHighlight", title: "Titolo - parte evidenziata (gradient)", type: "string" }),
+        defineField({ name: "titleNormal", title: "Titolo - parte normale", type: "string" }),
+        defineField({
+          name: "items",
+          title: "Recensioni",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({ name: "stars", title: "Stelle (1-5)", type: "number" }),
+                defineField({ name: "reviewTitle", title: "Titolo recensione", type: "string" }),
+                defineField({ name: "reviewText", title: "Testo", type: "text", rows: 4 }),
+                defineField({ name: "authorName", title: "Nome autore", type: "string" }),
+                defineField({ name: "authorRole", title: "Ruolo / Azienda", type: "string" }),
+                defineField({ name: "authorPhoto", title: "Foto autore", type: "image", options: { hotspot: true } }),
+                defineField({ name: "companyLogo", title: "Logo azienda", type: "image", options: { hotspot: true } }),
+              ],
+              preview: {
+                select: { title: "authorName", subtitle: "reviewTitle", media: "authorPhoto" },
+              },
+            },
+          ],
+        }),
+        defineField({ name: "ctaText", title: "Testo CTA", type: "string" }),
+        defineField({ name: "ctaHref", title: "Link CTA (es: /contatti)", type: "string" }),
+        defineField({ name: "socialProofText", title: "Testo social proof", type: "string" }),
+        defineField({
+          name: "socialProofAvatars",
+          title: "Foto avatar social proof (max 4)",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({ name: "photo", title: "Foto", type: "image", options: { hotspot: true } }),
+              ],
+              preview: {
+                select: { media: "photo" },
+                prepare({ media }) {
+                  return { title: "Avatar", media }
+                },
+              },
+            },
+          ],
+        }),
       ],
     }),
 
+    // LOGO MARQUEE
     defineField({
       name: "logoMarquee",
       title: "Sezione loghi clienti",
@@ -101,24 +164,6 @@ export const pageType = defineType({
       fieldset: "logoMarqueeSection",
       hidden: ({ document }) => document?.slug?.current !== "home",
       fields: [
-        defineField({ name: "title", title: "Titolo sezione", type: "string" }),
-        defineField({
-          name: "subtitle",
-          title: "Sottotitolo",
-          type: "array",
-          of: [
-            {
-              type: "block",
-              styles: [{ title: "Normal", value: "normal" }],
-              marks: {
-                decorators: [
-                  { title: "Bold", value: "strong" },
-                  { title: "Italic", value: "em" },
-                ],
-              },
-            },
-          ],
-        }),
         defineField({
           name: "logosRowOne",
           title: "Loghi riga 1 (va a destra →)",
@@ -152,6 +197,96 @@ export const pageType = defineType({
       ],
     }),
 
+    // VANTAGGIO UNICO
+    defineField({
+      name: "vantaggioUnico",
+      title: "Vantaggio Unico",
+      type: "object",
+      fieldset: "vantaggioUnicoSection",
+      fields: [
+        defineField({ name: "titleOne", title: "Titolo - parte 1 (normale)", type: "string" }),
+        defineField({ name: "highlightOne", title: "Titolo - parte 2 (gradient)", type: "string" }),
+        defineField({ name: "titleTwo", title: "Titolo - parte 3 (normale)", type: "string" }),
+        defineField({ name: "highlightTwo", title: "Titolo - parte 4 (gradient)", type: "string" }),
+        defineField({ name: "titleThree", title: "Titolo - parte 5 (normale)", type: "string" }),
+        defineField({ name: "subtitle", title: "Sottotitolo / Paragrafo", type: "text", rows: 4 }),
+        defineField({ name: "ctaText", title: "Testo CTA", type: "string" }),
+        defineField({ name: "ctaHref", title: "Link CTA (es: /contatti)", type: "string" }),
+      ],
+    }),
+
+    // VALUE PROPS
+    defineField({
+      name: "valueProps",
+      title: "Value Propositions",
+      type: "array",
+      fieldset: "valuePropsSection",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "label", title: "Label (es: DREAM OUTCOME)", type: "string" }),
+            defineField({ name: "titleHighlight", title: "Titolo - parte evidenziata (gradient)", type: "string" }),
+            defineField({ name: "titleNormal", title: "Titolo - parte normale", type: "string" }),
+            defineField({ name: "subtitle", title: "Paragrafo", type: "text", rows: 3 }),
+            defineField({ name: "ctaText", title: "Testo CTA", type: "string" }),
+            defineField({ name: "ctaHref", title: "Link CTA", type: "string" }),
+            defineField({
+              name: "mediaType",
+              title: "Tipo di media",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Immagine", value: "image" },
+                  { title: "Video", value: "video" },
+                  { title: "Lottie", value: "lottie" },
+                ],
+                layout: "radio",
+              },
+            }),
+            defineField({ name: "image", title: "Immagine", type: "image", options: { hotspot: true } }),
+            defineField({ name: "videoWebm", title: "Video .webm (URL)", type: "url" }),
+            defineField({ name: "videoMp4", title: "Video .mp4 (URL)", type: "url" }),
+            defineField({ name: "lottieFile", title: "Nome file Lottie (es: Work-Chat.json)", type: "string" }),
+          ],
+          preview: {
+            select: { title: "titleNormal", subtitle: "label", media: "image" },
+          },
+        },
+      ],
+    }),
+
+    // HOME PROJECTS
+    defineField({
+      name: "homeProjects",
+      title: "Sezione progetti Home",
+      description: "Compila questo campo solo nella pagina Home.",
+      type: "object",
+      fieldset: "homeProjectsSection",
+      hidden: ({ document }) => document?.slug?.current !== "home",
+      fields: [
+        defineField({ name: "title", title: "Titolo - prima parte", type: "string" }),
+        defineField({ name: "highlight", title: "Parola evidenziata", type: "string" }),
+        defineField({ name: "titleTwo", title: "Titolo - seconda parte", type: "string" }),
+        defineField({ name: "subtitle", title: "Sottotitolo", type: "text" }),
+      ],
+    }),
+
+    // STICKY SERVICES
+    defineField({
+      name: "stickyServices",
+      title: "Sezione Servizi Sticky",
+      type: "object",
+      fieldset: "stickyServicesSection",
+      hidden: ({ document }) => document?.slug?.current !== "home",
+      fields: [
+        defineField({ name: "titleHighlight", title: "Titolo - parte evidenziata (gradient)", type: "string" }),
+        defineField({ name: "titleNormal", title: "Titolo - parte normale", type: "string" }),
+        defineField({ name: "subtitle", title: "Sottotitolo", type: "text", rows: 3 }),
+      ],
+    }),
+
+    // TEAM CARDS
     defineField({
       name: "teamCards",
       title: "Sezione Team Cards",

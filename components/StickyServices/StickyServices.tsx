@@ -1,47 +1,62 @@
 'use client'
 
 import { useEffect } from "react"
+import dynamic from "next/dynamic"
+import statsLottie from "../../public/lotties/Stats-Going-Up (1).json"
 import "./StickyServices.css"
 
-const services = [
-  {
-    label: "Ecommerce Solutions",
-    title: "Ecommerce Shopify",
-    text: "Ottieni più vendite con un ecommerce Shopify progettato per convertire e offrire un’esperienza fluida.",
-    cta: "Ottimizza il tuo ecommerce",
-    href: "/ecommerce",
-    videoWebm: "https://next-level-media.it/wp-content/uploads/2026/03/Ecommerce.webm",
-    videoMp4: "https://next-level-media.it/wp-content/uploads/2026/03/Ecommerce.mp4",
-  },
-  {
-    label: "Conversion Optimization",
-    title: "Ottimizzazione Conversioni",
-    text: "Genera più ricavi dagli stessi visitatori migliorando conversioni e performance.",
-    cta: "Ottieni di più dal tuo traffico",
-    href: "/ottimizzazione-conversioni",
-    image: "https://next-level-media.it/wp-content/uploads/2026/04/Progetto-senza-titolo-2026-04-27T163434.994.webp",
-  },
-  {
-    label: "Shopify Development",
-    title: "Temi Shopify Custom",
-    text: "Supera i limiti dei temi standard con un ecommerce Shopify sviluppato su misura per il tuo business.",
-    cta: "Scopri il tuo tema su misura",
-    href: "/temi-shopify",
-    videoWebm: "https://next-level-media.it/wp-content/uploads/2025/12/Temi-shopify.01.webm",
-    videoMp4: "https://next-level-media.it/wp-content/uploads/2025/12/Temi-shopify.01.mp4",
-  },
-  {
-    label: "Web Performance",
-    title: "Siti Web Performanti",
-    text: "Ottieni più lead e clienti con pagine ottimizzate per guidare ogni utente all’azione.",
-    cta: "Ottimizza il tuo sito web",
-    href: "/siti-web",
-    videoWebm: "https://next-level-media.it/wp-content/uploads/2025/12/website.webm",
-    videoMp4: "https://next-level-media.it/wp-content/uploads/2025/12/website.mp4",
-  },
-]
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false })
 
-export default function StickyServices() {
+type Service = {
+  label: string
+  title: string
+  text: string
+  cta: string
+  href: string
+  videoWebm?: string
+  videoMp4?: string
+  image?: string
+  lottie?: string
+}
+
+type Props = {
+  titleHighlight?: string
+  titleNormal?: string
+  subtitle?: string
+  services: Service[]
+}
+
+function ServiceMedia({ service }: { service: Service }) {
+  if (service.lottie === "Stats-Going-Up (1).json") {
+    return (
+      <div className="flex items-center justify-center w-full h-full">
+        <Lottie
+          animationData={statsLottie}
+          loop
+          autoplay
+          style={{ width: "100%", maxWidth: 380 }}
+        />
+      </div>
+    )
+  }
+
+  if (service.videoWebm || service.videoMp4) {
+    return (
+      <video autoPlay muted loop playsInline preload="none" className="stack-video">
+        {service.videoWebm && <source src={service.videoWebm} />}
+        {service.videoMp4 && <source src={service.videoMp4} />}
+      </video>
+    )
+  }
+
+  if (service.image) {
+    return <img src={service.image} alt={service.title} className="stack-image" />
+  }
+
+  return null
+}
+
+export default function StickyServices({ titleHighlight, titleNormal, subtitle, services }: Props) {
   useEffect(() => {
     const cards = Array.from(
       document.querySelectorAll<HTMLElement>("[data-stack-card]")
@@ -68,7 +83,6 @@ export default function StickyServices() {
     }
 
     onScroll()
-
     window.addEventListener("scroll", onScroll, { passive: true })
     window.addEventListener("resize", onScroll)
 
@@ -80,49 +94,59 @@ export default function StickyServices() {
 
   return (
     <section className="sticky-services">
+
+      {(titleHighlight || titleNormal || subtitle) && (
+        <div className="mx-auto max-w-7xl px-6 pb-16 pt-24">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-6 items-start">
+
+            <div>
+              {(titleHighlight || titleNormal) && (
+                <h2 className="text-4xl font-black leading-[1.2] tracking-tight text-slate-950 dark:text-white md:text-[42px]">
+                  {titleHighlight && (
+                    <span className="bg-brand-gradient bg-clip-text text-transparent">
+                      {titleHighlight}
+                    </span>
+                  )}
+                  {titleHighlight && titleNormal && " "}
+                  {titleNormal}
+                </h2>
+              )}
+            </div>
+
+            {subtitle && (
+              <div className="lg:pt-3">
+                <p className="text-lg leading-8 text-slate-600 dark:text-slate-300">
+                  {subtitle}
+                </p>
+              </div>
+            )}
+
+          </div>
+        </div>
+      )}
+
       <div className="scroll-stack" id="services-stack">
         {services.map((service) => (
           <article className="stack-card" data-stack-card key={service.title}>
             <div className="stack-card-grid">
               <div className="stack-card-content">
                 <span className="stack-label">{service.label}</span>
-
                 <h3 className="stack-title">
                   <span>{service.title}</span>
                 </h3>
-
                 <p className="stack-text">{service.text}</p>
-
                 <a href={service.href} className="stack-button">
                   {service.cta}
                 </a>
               </div>
-
               <div className="stack-media">
-                {service.videoWebm || service.videoMp4 ? (
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="none"
-                    className="stack-video"
-                  >
-                    {service.videoWebm && <source src={service.videoWebm} />}
-                    {service.videoMp4 && <source src={service.videoMp4} />}
-                  </video>
-                ) : (
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="stack-image"
-                  />
-                )}
+                <ServiceMedia service={service} />
               </div>
             </div>
           </article>
         ))}
       </div>
+
     </section>
   )
 }

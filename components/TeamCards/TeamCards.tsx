@@ -56,13 +56,13 @@ export default function TeamCards({ titleHighlight, titleNormal, subtitle, cards
   const smallCards = cardList.slice(2)
 
   return (
-    <section className=" px-6 py-24">
+    <section className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
 
-        <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-2">
-          <div>
+        <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-5 items-start">
+          <div className="md:col-span-2">
             {(titleHighlight || titleNormal) && (
-              <h2 className="text-4xl font-black leading-[1.2] tracking-tight md:text-[42px] text-slate-950">
+              <h2 className="text-4xl font-black leading-[1.2] tracking-tight md:text-[42px] text-slate-950 dark:text-white">
                 {titleHighlight && (
                   <span className="bg-brand-gradient bg-clip-text text-transparent">
                     {titleHighlight}
@@ -73,7 +73,7 @@ export default function TeamCards({ titleHighlight, titleNormal, subtitle, cards
             )}
           </div>
           {subtitle && (
-            <div className="text-lg font-medium leading-8 text-slate-600">
+            <div className="md:col-span-3 md:pt-3 text-lg font-medium leading-8 text-slate-600 dark:text-slate-300">
               <PortableText value={subtitle} />
             </div>
           )}
@@ -88,7 +88,7 @@ export default function TeamCards({ titleHighlight, titleNormal, subtitle, cards
         )}
 
         {smallCards.length > 0 && (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {smallCards.map((card, i) => (
               <TeamCard key={i} card={card} />
             ))}

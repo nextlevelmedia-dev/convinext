@@ -218,3 +218,9 @@ header a.cta-bubble,
     font-size: 16px;
   }
 }
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
