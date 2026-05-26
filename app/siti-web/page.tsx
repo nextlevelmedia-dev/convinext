@@ -5,6 +5,11 @@ import ImpactSection from "@/components/ImpactSection/ImpactSection"
 import MockupMarquee from "@/components/MockupMarquee/MockupMarquee"
 import ReviewsSection from "@/components/ReviewsSection/ReviewsSection"
 import ValueProps from "@/components/ValueProps/ValueProps"
+import BenefitsSection from "@/components/BenefitsSection/BenefitsSection"
+import ProcessSitiWeb from "@/components/ProcessTimeline/ProcessSitiWeb"
+import FinalRecap from "@/components/FinalRecap/FinalRecap"
+import FaqSection from "@/components/FaqSection/FaqSection"
+import ContactSection from "@/components/ContactSection/ContactSection"
 import { client } from "@/sanity/lib/client"
 
 const sitiWebSlides = [
@@ -71,6 +76,44 @@ async function getPageData() {
       image{ asset->{ _id, url } },
       videoWebm,
       videoMp4,
+      lottieFile,
+      modelUrl
+    },
+    benefits{
+      titleHighlight,
+      titleNormal,
+      ctaText,
+      ctaHref,
+      items[]{
+        image{ asset->{ _id, url } },
+        title,
+        description
+      }
+    },
+    processSection{
+      titleHighlight,
+      titleNormal,
+      subtitle,
+      steps[]{ title, description }
+    },
+    faqSection{
+      titleHighlight,
+      titleNormal,
+      items[]{ question, answer }
+    },
+    finalRecap{
+      eyebrow,
+      titleHighlight,
+      titleNormal,
+      subtitle,
+      bulletPoints,
+      ctaText,
+      ctaHref,
+      ctaSubText,
+      mediaType,
+      image{ asset->{ _id, url } },
+      videoWebm,
+      videoMp4,
       lottieFile
     }
   }`
@@ -119,6 +162,45 @@ export default async function SitiWebPage() {
         />
 
         <ValueProps items={data?.valueProps} />
+
+        <BenefitsSection
+          titleHighlight={data?.benefits?.titleHighlight}
+          titleNormal={data?.benefits?.titleNormal}
+          ctaText={data?.benefits?.ctaText}
+          ctaHref={data?.benefits?.ctaHref}
+          items={data?.benefits?.items}
+        />
+
+        <ProcessSitiWeb
+          titleHighlight={data?.processSection?.titleHighlight}
+          titleNormal={data?.processSection?.titleNormal}
+          subtitle={data?.processSection?.subtitle}
+          steps={data?.processSection?.steps}
+        />
+
+        <FinalRecap
+          eyebrow={data?.finalRecap?.eyebrow}
+          titleHighlight={data?.finalRecap?.titleHighlight}
+          titleNormal={data?.finalRecap?.titleNormal}
+          subtitle={data?.finalRecap?.subtitle}
+          bulletPoints={data?.finalRecap?.bulletPoints}
+          ctaText={data?.finalRecap?.ctaText}
+          ctaHref={data?.finalRecap?.ctaHref}
+          ctaSubText={data?.finalRecap?.ctaSubText}
+          mediaType={data?.finalRecap?.mediaType}
+          image={data?.finalRecap?.image}
+          videoWebm={data?.finalRecap?.videoWebm}
+          videoMp4={data?.finalRecap?.videoMp4}
+          lottieFile={data?.finalRecap?.lottieFile}
+        />
+
+        <FaqSection
+          titleHighlight={data?.faqSection?.titleHighlight}
+          titleNormal={data?.faqSection?.titleNormal}
+          items={data?.faqSection?.items}
+        />
+
+        <ContactSection />
       </main>
     </>
   )

@@ -5,6 +5,11 @@ import ImpactSection from "@/components/ImpactSection/ImpactSection"
 import MockupMarquee from "@/components/MockupMarquee/MockupMarquee"
 import ReviewsSection from "@/components/ReviewsSection/ReviewsSection"
 import ValueProps from "@/components/ValueProps/ValueProps"
+import BenefitsSection from "@/components/BenefitsSection/BenefitsSection"
+import ProcessEcommerce from "@/components/ProcessTimeline/ProcessEcommerce"
+import FinalRecap from "@/components/FinalRecap/FinalRecap"
+import FaqSection from "@/components/FaqSection/FaqSection"
+import ContactSection from "@/components/ContactSection/ContactSection"
 import { client } from "@/sanity/lib/client"
 
 const query = `*[_type == "page" && slug.current == "ecommerce"][0]{
@@ -47,6 +52,44 @@ const query = `*[_type == "page" && slug.current == "ecommerce"][0]{
     image{ asset->{ _id, url } },
     videoWebm,
     videoMp4,
+    lottieFile,
+    modelUrl
+  },
+  benefits{
+    titleHighlight,
+    titleNormal,
+    ctaText,
+    ctaHref,
+    items[]{
+      image{ asset->{ _id, url } },
+      title,
+      description
+    }
+  },
+  processSection{
+    titleHighlight,
+    titleNormal,
+    subtitle,
+    steps[]{ title, description }
+  },
+  faqSection{
+    titleHighlight,
+    titleNormal,
+    items[]{ question, answer }
+  },
+  finalRecap{
+    eyebrow,
+    titleHighlight,
+    titleNormal,
+    subtitle,
+    bulletPoints,
+    ctaText,
+    ctaHref,
+    ctaSubText,
+    mediaType,
+    image{ asset->{ _id, url } },
+    videoWebm,
+    videoMp4,
     lottieFile
   }
 }`
@@ -83,6 +126,45 @@ export default async function EcommercePage() {
         />
 
         <ValueProps items={page?.valueProps} />
+
+        <BenefitsSection
+          titleHighlight={page?.benefits?.titleHighlight}
+          titleNormal={page?.benefits?.titleNormal}
+          ctaText={page?.benefits?.ctaText}
+          ctaHref={page?.benefits?.ctaHref}
+          items={page?.benefits?.items}
+        />
+
+        <ProcessEcommerce
+          titleHighlight={page?.processSection?.titleHighlight}
+          titleNormal={page?.processSection?.titleNormal}
+          subtitle={page?.processSection?.subtitle}
+          steps={page?.processSection?.steps}
+        />
+
+        <FinalRecap
+          eyebrow={page?.finalRecap?.eyebrow}
+          titleHighlight={page?.finalRecap?.titleHighlight}
+          titleNormal={page?.finalRecap?.titleNormal}
+          subtitle={page?.finalRecap?.subtitle}
+          bulletPoints={page?.finalRecap?.bulletPoints}
+          ctaText={page?.finalRecap?.ctaText}
+          ctaHref={page?.finalRecap?.ctaHref}
+          ctaSubText={page?.finalRecap?.ctaSubText}
+          mediaType={page?.finalRecap?.mediaType}
+          image={page?.finalRecap?.image}
+          videoWebm={page?.finalRecap?.videoWebm}
+          videoMp4={page?.finalRecap?.videoMp4}
+          lottieFile={page?.finalRecap?.lottieFile}
+        />
+
+        <FaqSection
+          titleHighlight={page?.faqSection?.titleHighlight}
+          titleNormal={page?.faqSection?.titleNormal}
+          items={page?.faqSection?.items}
+        />
+
+        <ContactSection />
       </main>
     </>
   )

@@ -7,6 +7,7 @@ import LogoMarquee from "../components/LogoMarquee/LogoMarquee"
 import VantaggioUnico from "../components/VantaggioUnico/VantaggioUnico"
 import ValueProps from "../components/ValueProps/ValueProps"
 import TeamCards from "../components/TeamCards/TeamCards"
+import ContactSection from "../components/ContactSection/ContactSection"
 import { client } from "../sanity/lib/client"
 
 const fallbackServices = [
@@ -49,7 +50,15 @@ const fallbackServices = [
 
 const query = `*[_type == "page" && slug.current == "home"][0]{
   hero,
-  homeProjects,
+  homeProjects{
+    title,
+    highlight,
+    titleTwo,
+    subtitle,
+    ctaLabel,
+    ctaText,
+    ctaHref
+  },
   logoMarquee{
     logosRowOne[]{ alt, logo{asset->{_id,url}} },
     logosRowTwo[]{ alt, logo{asset->{_id,url}} }
@@ -173,9 +182,15 @@ export default async function Home() {
           </div>
         </section>
 
-        <ProjectCarousel />
+        <ProjectCarousel
+          ctaLabel={page?.homeProjects?.ctaLabel}
+          ctaText={page?.homeProjects?.ctaText}
+          ctaHref={page?.homeProjects?.ctaHref}
+        />
 
         <TeamCards {...page?.teamCards} />
+
+        <ContactSection />
       </main>
     </>
   )

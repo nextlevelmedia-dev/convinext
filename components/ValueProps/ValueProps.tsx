@@ -5,6 +5,7 @@ import dynamic from "next/dynamic"
 import { urlFor } from "../../sanity/lib/image"
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false })
+const ThreeViewer = dynamic(() => import("../ThreeViewer/ThreeViewer"), { ssr: false })
 
 interface ValuePropItem {
   label?: string
@@ -13,11 +14,12 @@ interface ValuePropItem {
   subtitle?: string
   ctaText?: string
   ctaHref?: string
-  mediaType?: "image" | "video" | "lottie"
+  mediaType?: "image" | "video" | "lottie" | "3d"
   image?: { asset: { _ref: string } }
   videoWebm?: string
   videoMp4?: string
   lottieFile?: string
+  modelUrl?: string
 }
 
 interface ValuePropsProps {
@@ -58,6 +60,14 @@ function MediaBlock({ item }: { item: ValuePropItem }) {
       </div>
     )
   }
+
+  if (item.mediaType === "3d" && item.modelUrl) {
+  return (
+    <div className="w-full rounded-2xl" style={{ height: "400px" }}>
+      <ThreeViewer modelUrl={item.modelUrl} />
+    </div>
+  )
+}
 
   return (
     <div className="w-full rounded-2xl bg-slate-100 aspect-video flex items-center justify-center">

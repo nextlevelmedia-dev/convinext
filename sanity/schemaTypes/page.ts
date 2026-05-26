@@ -32,6 +32,16 @@ export const pageType = defineType({
       options: { collapsible: true, collapsed: false },
     },
     {
+      name: "benefitsSection",
+      title: "✅ Sezione Benefit",
+      options: { collapsible: true, collapsed: false },
+    },
+    {
+      name: "processSection",
+      title: "⚙️ Come Lavoriamo (Timeline)",
+      options: { collapsible: true, collapsed: false },
+    },
+    {
       name: "logoMarqueeSection",
       title: "🏷️ Sezione Loghi Clienti",
       options: { collapsible: true, collapsed: false },
@@ -54,6 +64,16 @@ export const pageType = defineType({
     {
       name: "teamCardsSection",
       title: "👥 Sezione Team/Cards",
+      options: { collapsible: true, collapsed: false },
+    },
+    {
+      name: "faqSection",
+      title: "❓ Sezione FAQ",
+      options: { collapsible: true, collapsed: false },
+    },
+    {
+      name: "finalRecapSection",
+      title: "🏁 Final Recap",
       options: { collapsible: true, collapsed: false },
     },
   ],
@@ -243,6 +263,7 @@ export const pageType = defineType({
                   { title: "Immagine", value: "image" },
                   { title: "Video", value: "video" },
                   { title: "Lottie", value: "lottie" },
+                  { title: "Oggetto 3D (.glb)", value: "3d" },
                 ],
                 layout: "radio",
               },
@@ -251,11 +272,68 @@ export const pageType = defineType({
             defineField({ name: "videoWebm", title: "Video .webm (URL)", type: "url" }),
             defineField({ name: "videoMp4", title: "Video .mp4 (URL)", type: "url" }),
             defineField({ name: "lottieFile", title: "Nome file Lottie (es: Work-Chat.json)", type: "string" }),
+            defineField({ name: "modelUrl", title: "URL modello 3D (.glb)", type: "string" }),
           ],
           preview: {
             select: { title: "titleNormal", subtitle: "label", media: "image" },
           },
         },
+      ],
+    }),
+
+    // BENEFITS
+    defineField({
+      name: "benefits",
+      title: "Sezione Benefit",
+      type: "object",
+      fieldset: "benefitsSection",
+      hidden: ({ document }) => document?.slug?.current === "home",
+      fields: [
+        defineField({ name: "titleHighlight", title: "Titolo - parte evidenziata (gradient)", type: "string" }),
+        defineField({ name: "titleNormal", title: "Titolo - parte normale", type: "string" }),
+        defineField({ name: "ctaText", title: "Testo CTA", type: "string" }),
+        defineField({ name: "ctaHref", title: "Link CTA (es: /contatti)", type: "string" }),
+        defineField({
+          name: "items",
+          title: "Card benefit",
+          type: "array",
+          of: [{
+            type: "object",
+            fields: [
+              defineField({ name: "image", title: "Icona / Immagine", type: "image", options: { hotspot: true } }),
+              defineField({ name: "title", title: "Titolo", type: "string" }),
+              defineField({ name: "description", title: "Descrizione", type: "text", rows: 3 }),
+            ],
+            preview: { select: { title: "title", media: "image" } },
+          }],
+        }),
+      ],
+    }),
+
+    // PROCESS SECTION
+    defineField({
+      name: "processSection",
+      title: "Come Lavoriamo (Timeline)",
+      type: "object",
+      fieldset: "processSection",
+      hidden: ({ document }) => document?.slug?.current === "home",
+      fields: [
+        defineField({ name: "titleHighlight", title: "Titolo - parte evidenziata (gradient)", type: "string" }),
+        defineField({ name: "titleNormal", title: "Titolo - parte normale", type: "string" }),
+        defineField({ name: "subtitle", title: "Sottotitolo", type: "text", rows: 2 }),
+        defineField({
+          name: "steps",
+          title: "Step",
+          type: "array",
+          of: [{
+            type: "object",
+            fields: [
+              defineField({ name: "title", title: "Titolo step", type: "string" }),
+              defineField({ name: "description", title: "Descrizione", type: "text", rows: 4 }),
+            ],
+            preview: { select: { title: "title" } },
+          }],
+        }),
       ],
     }),
 
@@ -393,6 +471,73 @@ export const pageType = defineType({
             },
           ],
         }),
+      ],
+    }),
+
+    // FAQ
+    defineField({
+      name: "faqSection",
+      title: "Sezione FAQ",
+      type: "object",
+      fieldset: "faqSection",
+      hidden: ({ document }) => document?.slug?.current === "home",
+      fields: [
+        defineField({ name: "titleHighlight", title: "Titolo - parte evidenziata (gradient)", type: "string" }),
+        defineField({ name: "titleNormal", title: "Titolo - parte normale", type: "string" }),
+        defineField({
+          name: "items",
+          title: "Domande e risposte",
+          type: "array",
+          of: [{
+            type: "object",
+            fields: [
+              defineField({ name: "question", title: "Domanda", type: "string" }),
+              defineField({ name: "answer", title: "Risposta", type: "text", rows: 4 }),
+            ],
+            preview: { select: { title: "question" } },
+          }],
+        }),
+      ],
+    }),
+
+    // FINAL RECAP
+    defineField({
+      name: "finalRecap",
+      title: "Final Recap",
+      type: "object",
+      fieldset: "finalRecapSection",
+      hidden: ({ document }) => document?.slug?.current === "home",
+      fields: [
+        defineField({ name: "eyebrow", title: "Eyebrow (es: SOCIAL PROOF #1)", type: "string" }),
+        defineField({ name: "titleHighlight", title: "Titolo - parte evidenziata (gradient)", type: "string" }),
+        defineField({ name: "titleNormal", title: "Titolo - parte normale", type: "string" }),
+        defineField({ name: "subtitle", title: "Paragrafo", type: "text", rows: 3 }),
+        defineField({
+          name: "bulletPoints",
+          title: "Punti elenco",
+          type: "array",
+          of: [{ type: "string" }],
+        }),
+        defineField({ name: "ctaText", title: "Testo CTA principale", type: "string" }),
+        defineField({ name: "ctaHref", title: "Link CTA principale", type: "string" }),
+        defineField({ name: "ctaSubText", title: "Testo sotto CTA (es: REDUCE FUDS)", type: "string" }),
+        defineField({
+          name: "mediaType",
+          title: "Tipo di media (destra)",
+          type: "string",
+          options: {
+            list: [
+              { title: "Immagine", value: "image" },
+              { title: "Video", value: "video" },
+              { title: "Lottie", value: "lottie" },
+            ],
+            layout: "radio",
+          },
+        }),
+        defineField({ name: "image", title: "Immagine", type: "image", options: { hotspot: true } }),
+        defineField({ name: "videoWebm", title: "Video .webm (URL)", type: "url" }),
+        defineField({ name: "videoMp4", title: "Video .mp4 (URL)", type: "url" }),
+        defineField({ name: "lottieFile", title: "Nome file Lottie (es: Work-Chat.json)", type: "string" }),
       ],
     }),
   ],

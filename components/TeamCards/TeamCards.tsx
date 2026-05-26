@@ -55,24 +55,24 @@ export default function TeamCards({ titleHighlight, titleNormal, subtitle, cards
   const smallCards = cardList.slice(2)
 
   return (
-    <section className="px-6 py-24" style={{ backgroundColor: "#0f1f3d" }}>
+    <section className="px-6 py-24" style={{ backgroundColor: "#f2f2f2" }}>
       <div className="mx-auto max-w-6xl">
 
         <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-5 items-start">
           <div className="md:col-span-2">
             {(titleHighlight || titleNormal) && (
-              <h2 className="text-4xl font-black leading-[1.2] tracking-tight md:text-[42px] text-white">
+              <h2 className="text-4xl font-black leading-[1.2] tracking-tight md:text-[42px] text-slate-950">
                 {titleHighlight && (
                   <span className="bg-brand-gradient bg-clip-text text-transparent">
                     {titleHighlight}
                   </span>
                 )}
-                {titleNormal && <span className="text-white">{titleNormal}</span>}
+                {titleNormal && <span className="text-slate-950">{titleNormal}</span>}
               </h2>
             )}
           </div>
           {subtitle && (
-            <div className="md:col-span-3 md:pt-3 text-lg font-medium leading-8 text-white/70">
+            <div className="md:col-span-3 md:pt-3 text-lg font-medium leading-8 text-slate-600">
               <PortableText value={subtitle} />
             </div>
           )}
