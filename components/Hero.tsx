@@ -73,19 +73,18 @@ export default function Hero({
           <div>
             {rightContent ? rightContent : (
               <div className="relative w-full">
-
                 <div className="relative z-10 rounded-[2rem] border border-white/10 bg-white p-6 shadow-2xl shadow-black/30">
                   <div className="mb-4 flex items-center gap-2">
                     <div className="h-2.5 w-2.5 rounded-full bg-red-400" />
                     <div className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
                     <div className="h-2.5 w-2.5 rounded-full bg-green-400" />
-                    <span style={{color: "#94a3b8"}} className="ml-2 text-xs font-medium">next-level-media.it — Analytics</span>
+                    <span style={{ color: "#94a3b8" }} className="ml-2 text-xs font-medium">next-level-media.it — Analytics</span>
                   </div>
 
                   <div className="mb-4 rounded-2xl bg-gradient-to-br from-slate-50 to-blue-50 p-4">
                     <div className="mb-3 flex items-center justify-between">
-                      <span style={{color: "#64748b"}} className="text-xs font-semibold">Conversioni mensili</span>
-                      <span style={{color: "#22c55e"}} className="text-xs font-bold">↑ +42%</span>
+                      <span style={{ color: "#64748b" }} className="text-xs font-semibold">Conversioni mensili</span>
+                      <span style={{ color: "#22c55e" }} className="text-xs font-bold">↑ +42%</span>
                     </div>
                     <div className="flex items-end gap-1.5 h-20">
                       {[30, 45, 35, 55, 48, 65, 58, 75, 68, 85, 78, 95].map((h, i) => (
@@ -101,7 +100,7 @@ export default function Hero({
                         />
                       ))}
                     </div>
-                    <div className="mt-2 flex justify-between text-[10px]" style={{color: "#94a3b8"}}>
+                    <div className="mt-2 flex justify-between text-[10px]" style={{ color: "#94a3b8" }}>
                       <span>Gen</span><span>Mar</span><span>Giu</span><span>Set</span><span>Dic</span>
                     </div>
                   </div>
@@ -109,15 +108,15 @@ export default function Hero({
                   <div className="grid grid-cols-3 gap-3">
                     <div className="rounded-xl bg-slate-50 p-3 text-center">
                       <p className="text-lg font-black bg-brand-gradient bg-clip-text text-transparent">+42%</p>
-                      <p style={{color: "#64748b"}} className="text-[10px] mt-0.5">Conversioni</p>
+                      <p style={{ color: "#64748b" }} className="text-[10px] mt-0.5">Conversioni</p>
                     </div>
                     <div className="rounded-xl bg-slate-50 p-3 text-center">
-                      <p style={{color: "#0f172a"}} className="text-lg font-black">2.8x</p>
-                      <p style={{color: "#64748b"}} className="text-[10px] mt-0.5">ROAS medio</p>
+                      <p style={{ color: "#0f172a" }} className="text-lg font-black">2.8x</p>
+                      <p style={{ color: "#64748b" }} className="text-[10px] mt-0.5">ROAS medio</p>
                     </div>
                     <div className="rounded-xl bg-slate-50 p-3 text-center">
-                      <p style={{color: "#0f172a"}} className="text-lg font-black">+120</p>
-                      <p style={{color: "#64748b"}} className="text-[10px] mt-0.5">Lead/mese</p>
+                      <p style={{ color: "#0f172a" }} className="text-lg font-black">+120</p>
+                      <p style={{ color: "#64748b" }} className="text-[10px] mt-0.5">Lead/mese</p>
                     </div>
                   </div>
                 </div>
@@ -128,8 +127,8 @@ export default function Hero({
                       <span className="text-green-600 text-sm">✓</span>
                     </div>
                     <div>
-                      <p style={{color: "#1e293b"}} className="text-xs font-bold">Nuovo cliente</p>
-                      <p style={{color: "#94a3b8"}} className="text-[10px]">2 min fa</p>
+                      <p style={{ color: "#1e293b" }} className="text-xs font-bold">Nuovo cliente</p>
+                      <p style={{ color: "#94a3b8" }} className="text-[10px]">2 min fa</p>
                     </div>
                   </div>
                 </div>
@@ -143,12 +142,11 @@ export default function Hero({
                       <span className="text-white text-xs font-bold">↑</span>
                     </div>
                     <div>
-                      <p style={{color: "#1e293b"}} className="text-xs font-bold">PageSpeed 98/100</p>
-                      <p style={{color: "#94a3b8"}} className="text-[10px]">Performance ottimale</p>
+                      <p style={{ color: "#1e293b" }} className="text-xs font-bold">PageSpeed 98/100</p>
+                      <p style={{ color: "#94a3b8" }} className="text-[10px]">Performance ottimale</p>
                     </div>
                   </div>
                 </div>
-
               </div>
             )}
           </div>
@@ -156,8 +154,8 @@ export default function Hero({
         </div>
       </section>
 
-      {/* BANDA STATISTICHE */}
-      <div className="hero-stats border-y border-slate-200 py-8 px-6" style={{ backgroundColor: "#f2f2f2" }}>
+      {/* BANDA STATISTICHE — niente style inline, gestita da CSS */}
+      <div className="hero-stats border-y border-slate-200 py-8 px-6">
         <div className="mx-auto max-w-7xl flex flex-col-reverse md:flex-row items-center gap-6 md:gap-0">
 
           <div className="flex items-center gap-3 md:pr-8 md:border-r border-slate-200 shrink-0 w-full md:w-auto justify-center md:justify-start">

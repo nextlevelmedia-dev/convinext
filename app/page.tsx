@@ -29,15 +29,6 @@ const fallbackServices = [
     lottie: "Stats-Going-Up (1).json",
   },
   {
-    label: "Shopify Development",
-    title: "Temi Shopify Custom",
-    text: "Supera i limiti dei temi standard con un ecommerce Shopify sviluppato su misura per il tuo business.",
-    cta: "Scopri il tuo tema su misura",
-    href: "/temi-shopify",
-    videoWebm: "https://next-level-media.it/wp-content/uploads/2025/12/Temi-shopify.01.webm",
-    videoMp4: "https://next-level-media.it/wp-content/uploads/2025/12/Temi-shopify.01.mp4",
-  },
-  {
     label: "Web Performance",
     title: "Siti Web Performanti",
     text: "Ottieni più lead e clienti con pagine ottimizzate per guidare ogni utente all'azione.",

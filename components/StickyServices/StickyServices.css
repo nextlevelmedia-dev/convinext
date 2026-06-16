@@ -6,7 +6,7 @@
 
 .scroll-stack {
   position: relative;
-  height: 360vh;
+  height: 270vh;
   max-width: 1200px;
   margin: 0 auto;
   overflow: visible;
@@ -36,7 +36,6 @@
 .stack-card:nth-child(1) { z-index: 1; }
 .stack-card:nth-child(2) { z-index: 2; }
 .stack-card:nth-child(3) { z-index: 3; }
-.stack-card:nth-child(4) { z-index: 4; }
 
 .stack-card.is-compressed {
   transform: translateY(-28px) scale(0.965);
@@ -143,7 +142,7 @@
   }
 
   .scroll-stack {
-    height: 390vh;
+    height: 300vh;
     max-width: 100%;
   }
 

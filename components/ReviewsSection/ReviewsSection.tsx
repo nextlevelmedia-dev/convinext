@@ -46,20 +46,23 @@ function StarRating({ stars }: { stars: number }) {
 
 function ReviewCard({ review }: { review: Review }) {
   return (
-    <div
-      className="rounded-2xl border border-slate-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-300 mb-3"
-      style={{ textAlign: "left", color: "#171717" }}
-    >
+    <div className="review-card rounded-2xl p-5 mb-3 transition-all duration-300 hover:-translate-y-1">
       <StarRating stars={review.stars} />
 
       {review.reviewTitle && (
-        <h3 style={{ color: "#0f172a", fontSize: "18px", fontWeight: 700, marginBottom: "8px", lineHeight: "1.4" }}>
+        <h3
+          className="review-card-title"
+          style={{ fontSize: "18px", fontWeight: 700, marginBottom: "8px", lineHeight: "1.4" }}
+        >
           &ldquo;{review.reviewTitle}&rdquo;
         </h3>
       )}
 
       {review.reviewText && (
-        <p style={{ color: "#64748b", fontSize: "14px", lineHeight: "1.6", marginBottom: "16px" }}>
+        <p
+          className="review-card-text"
+          style={{ fontSize: "14px", lineHeight: "1.6", marginBottom: "16px" }}
+        >
           &ldquo;{review.reviewText}&rdquo;
         </p>
       )}
@@ -94,9 +97,16 @@ function ReviewCard({ review }: { review: Review }) {
             </div>
           )}
           <div>
-            <p style={{ color: "#0f172a", fontSize: "13px", fontWeight: 700, lineHeight: 1.2 }}>{review.authorName}</p>
+            <p
+              className="review-card-author"
+              style={{ fontSize: "13px", fontWeight: 700, lineHeight: 1.2 }}
+            >
+              {review.authorName}
+            </p>
             {review.authorRole && (
-              <p style={{ color: "#94a3b8", fontSize: "11px" }}>{review.authorRole}</p>
+              <p className="review-card-role" style={{ fontSize: "11px" }}>
+                {review.authorRole}
+              </p>
             )}
           </div>
         </div>
@@ -153,15 +163,23 @@ export default function ReviewsSection({
           <div className="text-center mb-12 pb-4 max-w-2xl mx-auto">
             <h2
               className="reviews-title"
-              style={{ fontSize: "clamp(32px, 4vw, 42px)", fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1.2, color: "#0f172a" }}
+              style={{
+                fontSize: "clamp(32px, 4vw, 42px)",
+                fontWeight: 900,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.2,
+                color: "#0f172a",
+              }}
             >
               {titleHighlight && (
-                <span style={{
-                  background: "linear-gradient(to right, #fc03b0, #047cf9)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}>
+                <span
+                  style={{
+                    background: "linear-gradient(to right, #fc03b0, #047cf9)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
                   {titleHighlight}
                 </span>
               )}
@@ -178,21 +196,26 @@ export default function ReviewsSection({
         </div>
 
         {(ctaText || socialProofText) && (
-          <div style={{ marginTop: "48px", display: "flex", flexDirection: "column", alignItems: "center", gap: "40px" }}>
-
-            {ctaText && ctaHref && (
-              <a href={ctaHref} style={ctaStyle}>{ctaText}</a>
-            )}
-
-            {ctaText && !ctaHref && (
-              <a href="/contatti" style={ctaStyle}>{ctaText}</a>
+          <div
+            style={{
+              marginTop: "48px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "40px",
+            }}
+          >
+            {ctaText && (
+              <a href={ctaHref ?? "/contatti"} style={ctaStyle}>
+                {ctaText}
+              </a>
             )}
 
             {(socialProofAvatars?.length || socialProofText) && (
               <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 {socialProofAvatars && socialProofAvatars.length > 0 && (
                   <div style={{ display: "flex" }}>
-                    {socialProofAvatars.slice(0, 4).map((a, i) => (
+                    {socialProofAvatars.slice(0, 4).map((a, i) =>
                       a.photo ? (
                         <Image
                           key={i}
@@ -226,7 +249,7 @@ export default function ReviewsSection({
                           }}
                         />
                       )
-                    ))}
+                    )}
                   </div>
                 )}
                 {socialProofText && (
@@ -236,7 +259,6 @@ export default function ReviewsSection({
                 )}
               </div>
             )}
-
           </div>
         )}
 

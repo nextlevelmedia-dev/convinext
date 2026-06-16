@@ -46,10 +46,8 @@ export default function Header() {
               </button>
             </div>
 
-            <Link href="/temi-shopify" className="transition-colors">Temi Shopify</Link>
             <Link href="/progetti" className="transition-colors">Progetti</Link>
             <Link href="/chi-siamo" className="transition-colors">Chi Siamo</Link>
-            <Link href="/blog" className="transition-colors">Blog</Link>
           </nav>
 
           <div className="hidden items-center gap-4 md:flex">

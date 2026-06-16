@@ -21,7 +21,9 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* HEADER — blindato */
+/* =========================
+   HEADER
+========================= */
 header {
   background: rgba(255, 255, 255, 0.85) !important;
   backdrop-filter: blur(20px);
@@ -48,22 +50,26 @@ header svg {
   color: #ffffff !important;
 }
 
-/* Logo — span deve restare transparent per mostrare il gradient */
 header a.logo-link span,
 .dark header a.logo-link span {
   color: transparent !important;
 }
 
-/* Bubble CTA — freccia sempre bianca */
 header a.cta-bubble,
 .dark header a.cta-bubble {
   color: #ffffff !important;
 }
 
+/* =========================
+   BRAND GRADIENT
+========================= */
 .bg-brand-gradient {
   background-image: linear-gradient(to right, #fc03b0, #047cf9);
 }
 
+/* =========================
+   MAIN BG
+========================= */
 .main-bg {
   background:
     radial-gradient(ellipse at 0% 0%, rgba(252, 3, 176, 0.02) 0%, transparent 55%),
@@ -72,8 +78,6 @@ header a.cta-bubble,
   color: #171717;
 }
 
-
-/* DARK MODE body e main */
 .dark body {
   background: #080808;
   color: #ffffff;
@@ -87,7 +91,6 @@ header a.cta-bubble,
   color: #ffffff;
 }
 
-/* testi sul body diventano bianchi */
 .dark .main-bg h1,
 .dark .main-bg h2,
 .dark .main-bg h3,
@@ -98,7 +101,7 @@ header a.cta-bubble,
   color: #ffffff;
 }
 
-/* card bianche — testi restano scuri */
+/* Card bianche — testi restano scuri */
 .dark .main-bg .team-card,
 .dark .main-bg .nlm-card,
 .dark .main-bg .stack-card {
@@ -116,34 +119,99 @@ header a.cta-bubble,
   color: #171717;
 }
 
-/* stack-title span usa gradient — non toccare */
 .dark .main-bg .stack-card .stack-title span {
   color: transparent;
 }
 
-/* Banda statistiche hero — sempre chiara, immune al dark mode */
+/* =========================
+   BANDA STATISTICHE HERO
+========================= */
 .hero-stats {
-  background-color: #f2f2f2 !important;
+  background-color: #f2f2f2;
+  border-color: #e2e8f0;
 }
 
+.dark .hero-stats {
+  background-color: #0c0c14;
+  background-image:
+    radial-gradient(ellipse at 0% 50%, rgba(252, 3, 176, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 100% 50%, rgba(4, 124, 249, 0.10) 0%, transparent 60%);
+  border-top-color: rgba(255, 255, 255, 0.04);
+  border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+.dark .hero-stats p,
 .dark .hero-stats h1,
 .dark .hero-stats h2,
 .dark .hero-stats h3,
-.dark .hero-stats h4,
-.dark .hero-stats p {
-  color: #64748b !important;
+.dark .hero-stats h4 {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .dark .hero-stats span:not([class*="bg-brand"]) {
-  color: #64748b !important;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .dark .hero-stats span[class*="bg-brand"],
 .dark .hero-stats p[class*="bg-brand"] {
-  color: transparent !important;
+  color: transparent;
 }
 
-/* Reviews title — segue dark mode */
+.dark .hero-stats [class*="divide-x"] > * {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark .hero-stats [class*="border-r"] {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* =========================
+   DARK GLOW — bordo 3D luminoso
+========================= */
+.dark-glow {
+  position: relative;
+  background-color: #111118;
+  background-image:
+    radial-gradient(ellipse at 10% 50%, rgba(252, 3, 176, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 50%, rgba(4, 124, 249, 0.08) 0%, transparent 50%);
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background-clip: padding-box;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 1px 0 0 rgba(255, 255, 255, 0.12),
+    0 -1px 0 0 rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  transition:
+    background-image 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+.dark-glow:hover {
+  background-image:
+    radial-gradient(ellipse at 10% 50%, rgba(252, 3, 176, 0.26) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 50%, rgba(4, 124, 249, 0.20) 0%, transparent 55%);
+  box-shadow:
+    0 0 0 1px rgba(252, 3, 176, 0.25),
+    0 1px 0 0 rgba(255, 255, 255, 0.15),
+    0 -1px 0 0 rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(252, 3, 176, 0.08),
+    0 0 60px rgba(4, 124, 249, 0.05);
+}
+
+.dark-glow * {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.dark-glow span[class*="bg-brand"],
+.dark-glow p[class*="bg-brand"] {
+  color: transparent;
+}
+
+/* Reviews title */
 .dark .reviews-title {
   color: #ffffff !important;
 }
@@ -251,4 +319,166 @@ html,
 body {
   scroll-behavior: smooth;
 }
+
+/* =========================
+   REVIEW CARD
+========================= */
+.review-card {
+  background-color: #ffffff;
+  background-image:
+    radial-gradient(ellipse at 10% 50%, rgba(252, 3, 176, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 50%, rgba(4, 124, 249, 0.03) 0%, transparent 50%);
+  border: 1px solid rgba(252, 3, 176, 0.10);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.review-card:hover {
+  background-image:
+    radial-gradient(ellipse at 10% 50%, rgba(252, 3, 176, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 50%, rgba(4, 124, 249, 0.06) 0%, transparent 55%);
+  border-color: rgba(252, 3, 176, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(252, 3, 176, 0.20),
+    0 1px 0 0 rgba(255, 255, 255, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 8px 32px rgba(252, 3, 176, 0.10),
+    0 4px 16px rgba(4, 124, 249, 0.06),
+    0 0 20px rgba(252, 3, 176, 0.06);
+}
+
+.review-card-title { color: #0f172a; }
+.review-card-text { color: #64748b; }
+.review-card-author { color: #0f172a; }
+.review-card-role { color: #94a3b8; }
+
+/* Dark mode */
+.dark .review-card {
+  background-color: #111118;
+  background-image:
+    radial-gradient(ellipse at 10% 50%, rgba(252, 3, 176, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 50%, rgba(4, 124, 249, 0.08) 0%, transparent 50%);
+  border: 1px solid transparent;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 1px 0 0 rgba(255, 255, 255, 0.12),
+    0 -1px 0 0 rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.dark .review-card:hover {
+  background-image:
+    radial-gradient(ellipse at 10% 50%, rgba(252, 3, 176, 0.26) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 50%, rgba(4, 124, 249, 0.20) 0%, transparent 55%);
+  box-shadow:
+    0 0 0 1px rgba(252, 3, 176, 0.25),
+    0 1px 0 0 rgba(255, 255, 255, 0.15),
+    0 -1px 0 0 rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(252, 3, 176, 0.08),
+    0 0 60px rgba(4, 124, 249, 0.05);
+}
+
+.dark .review-card-title { color: rgba(255, 255, 255, 0.95); }
+.dark .review-card-text { color: rgba(255, 255, 255, 0.60); }
+.dark .review-card-author { color: rgba(255, 255, 255, 0.90); }
+.dark .review-card-role { color: rgba(255, 255, 255, 0.45); }
+
+/* =========================
+   REVIEW CARD
+========================= */
+.review-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.review-card-title { color: #0f172a; }
+.review-card-text { color: #64748b; }
+.review-card-author { color: #0f172a; }
+.review-card-role { color: #94a3b8; }
+
+.review-card:hover {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border-color: #cbd5e1;
+}
+
+.dark .review-card {
+  background-color: #111118;
+  background-image:
+    radial-gradient(ellipse at 10% 50%, rgba(252, 3, 176, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 50%, rgba(4, 124, 249, 0.08) 0%, transparent 50%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.dark .review-card:hover {
+  background-image:
+    radial-gradient(ellipse at 10% 50%, rgba(252, 3, 176, 0.26) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 50%, rgba(4, 124, 249, 0.20) 0%, transparent 55%);
+  border-color: rgba(252, 3, 176, 0.30);
+  box-shadow:
+    0 0 0 1px rgba(252, 3, 176, 0.25),
+    0 1px 0 0 rgba(255, 255, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(252, 3, 176, 0.08),
+    0 0 60px rgba(4, 124, 249, 0.05);
+}
+
+.dark .review-card-title { color: rgba(255, 255, 255, 0.95); }
+.dark .review-card-text { color: rgba(255, 255, 255, 0.60); }
+.dark .review-card-author { color: rgba(255, 255, 255, 0.90); }
+.dark .review-card-role { color: rgba(255, 255, 255, 0.45); }
+
+
+/* =========================
+   BENEFITS SECTION — dark mode
+========================= */
+.dark .benefits-section {
+  background-color: #111118;
+  background-image:
+    radial-gradient(ellipse at 10% 50%, rgba(252, 3, 176, 0.14) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 50%, rgba(4, 124, 249, 0.10) 0%, transparent 50%);
+}
+
+.dark .benefits-section h2,
+.dark .benefits-section h3,
+.dark .benefits-section p {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.dark .benefits-section .benefit-card {
+  background-color: #111118;
+  background-image:
+    radial-gradient(ellipse at 10% 50%, rgba(252, 3, 176, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 50%, rgba(4, 124, 249, 0.08) 0%, transparent 50%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.dark .benefits-section .benefit-card:hover {
+  background-image:
+    radial-gradient(ellipse at 10% 50%, rgba(252, 3, 176, 0.26) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 50%, rgba(4, 124, 249, 0.20) 0%, transparent 55%);
+  border-color: rgba(252, 3, 176, 0.30);
+  box-shadow:
+    0 0 0 1px rgba(252, 3, 176, 0.25),
+    0 1px 0 0 rgba(255, 255, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(252, 3, 176, 0.08),
+    0 0 60px rgba(4, 124, 249, 0.05);
+}
+
+.dark .benefits-section h3 { color: rgba(255, 255, 255, 0.95); }
+.dark .benefits-section p { color: rgba(255, 255, 255, 0.60); }
 
