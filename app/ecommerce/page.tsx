@@ -53,7 +53,8 @@ const query = `*[_type == "page" && slug.current == "ecommerce"][0]{
     videoWebm,
     videoMp4,
     lottieFile,
-    modelUrl
+    modelUrl,
+    componentKey
   },
   benefits{
     titleHighlight,

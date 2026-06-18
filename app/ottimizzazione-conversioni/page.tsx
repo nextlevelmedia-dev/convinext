@@ -57,7 +57,8 @@ const query = `*[_type == "page" && slug.current == "ottimizzazione-conversioni"
     videoWebm,
     videoMp4,
     lottieFile,
-    modelUrl
+    modelUrl,
+    componentKey
   },
   benefits{
     titleHighlight,

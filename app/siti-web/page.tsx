@@ -77,7 +77,8 @@ async function getPageData() {
       videoWebm,
       videoMp4,
       lottieFile,
-      modelUrl
+      modelUrl,
+      componentKey
     },
     benefits{
       titleHighlight,

@@ -19,11 +19,11 @@ export default function FaqSection({ titleHighlight, titleNormal, items }: FaqSe
   if (!items?.length) return null
 
   return (
-    <section className="py-24 px-6" style={{ backgroundColor: "#f2f2f2" }}>
+    <section className="faq-section py-24 px-6">
       <div className="mx-auto" style={{ maxWidth: "760px" }}>
 
         {(titleHighlight || titleNormal) && (
-          <h2 className="text-4xl font-black tracking-tight leading-[1.2] text-slate-950 text-center mb-16">
+          <h2 className="text-4xl font-black tracking-tight leading-[1.2] text-slate-950 dark:text-white text-center mb-16">
             {titleHighlight && (
               <span className="bg-brand-gradient bg-clip-text text-transparent">{titleHighlight}</span>
             )}
@@ -34,16 +34,17 @@ export default function FaqSection({ titleHighlight, titleNormal, items }: FaqSe
 
         <div className="flex flex-col">
           {items.map((item, i) => (
-            <div key={i} style={{ borderBottom: "1px solid rgba(0,0,0,0.10)" }}>
+            <div key={i} className="border-b border-black/10 dark:border-white/10">
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full flex items-center justify-between py-5 text-left gap-4"
                 style={{ background: "none", border: "none", cursor: "pointer" }}
               >
-                <span className="text-slate-950 font-semibold text-lg leading-snug">
+                <span className="text-slate-950 dark:text-white font-semibold text-lg leading-snug">
                   {item.question}
                 </span>
                 <span
+                  className="dark:text-white/40"
                   style={{
                     color: "rgba(0,0,0,0.4)",
                     fontSize: "20px",
@@ -65,7 +66,7 @@ export default function FaqSection({ titleHighlight, titleNormal, items }: FaqSe
                 }}
               >
                 <p
-                  className="text-base leading-7 pb-5"
+                  className="text-base leading-7 pb-5 dark:text-white/60"
                   style={{ color: "rgba(0,0,0,0.60)" }}
                 >
                   {item.answer}

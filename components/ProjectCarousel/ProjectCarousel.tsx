@@ -9,7 +9,7 @@ export default function ProjectCarousel() {
   useEffect(() => {
     const slides = Array.from(document.querySelectorAll<HTMLElement>('.nlm-slide'))
     const track = document.querySelector<HTMLElement>('.nlm-track')
-    const section = sectionRef.current
+    const section = sectionRef.current!
     const nextButton = document.querySelector<HTMLButtonElement>('.nlm-btn.next')
     const prevButton = document.querySelector<HTMLButtonElement>('.nlm-btn.prev')
 

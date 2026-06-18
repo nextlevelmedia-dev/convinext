@@ -43,7 +43,7 @@ export const pageType = defineType({
         defineField({ name: "highlightTwo", title: "Parola evidenziata 2", type: "string" }),
         defineField({ name: "subtitle", title: "Sottotitolo", type: "text" }),
         defineField({ name: "ctaText", title: "Testo bottone", type: "string" }),
-        defineField({ name: "lottieFile", title: "Lottie destra Hero — es: Software-Development.json", type: "string", hidden: ({ document }) => document?.slug?.current !== "chi-siamo" }),
+        defineField({ name: "lottieFile", title: "Lottie destra Hero — es: Software-Development.json", type: "string", hidden: ({ document }) => (document as any)?.slug?.current !== "chi-siamo" }),
       ],
     }),
 
@@ -51,7 +51,7 @@ export const pageType = defineType({
       name: "mockupSlides", title: "Hero mockup slides",
       description: "Compila solo per Siti Web ed Ecommerce.",
       type: "array", fieldset: "heroSection",
-      hidden: ({ document }) => !["ecommerce", "siti-web"].includes(document?.slug?.current ?? ""),
+      hidden: ({ document }) => !["ecommerce", "siti-web"].includes((document as any)?.slug?.current ?? ""),
       of: [{
         type: "object", title: "Mockup slide",
         fields: [
@@ -103,7 +103,7 @@ export const pageType = defineType({
     // ─── MOCKUP MARQUEE ────────────────────────────────────────────────────────
     defineField({
       name: "mockupMarquee", title: "Mockup Marquee", type: "object", fieldset: "mockupMarqueeSection",
-      hidden: ({ document }) => !["ecommerce", "siti-web"].includes(document?.slug?.current ?? ""),
+      hidden: ({ document }) => !["ecommerce", "siti-web"].includes((document as any)?.slug?.current ?? ""),
       fields: [
         defineField({
           name: "rowOne", title: "Riga 1 (va a destra →)", type: "array",
@@ -167,6 +167,7 @@ export const pageType = defineType({
           options: { list: [
             { title: "Immagine", value: "image" }, { title: "Video", value: "video" },
             { title: "Lottie", value: "lottie" }, { title: "Oggetto 3D (.glb)", value: "3d" },
+            { title: "Componente React", value: "component" },
           ], layout: "radio" },
         }),
         defineField({ name: "image", title: "Immagine", type: "image", options: { hotspot: true } }),
@@ -174,6 +175,7 @@ export const pageType = defineType({
         defineField({ name: "videoMp4", title: "Video .mp4 (URL)", type: "url" }),
         defineField({ name: "lottieFile", title: "Nome file Lottie (es: Work-Chat.json)", type: "string" }),
         defineField({ name: "modelUrl", title: "URL modello 3D (.glb)", type: "string" }),
+        defineField({ name: "componentKey", title: "Component Key (es: cro-analisi)", type: "string" }),
       ], preview: { select: { title: "titleNormal", subtitle: "label", media: "image" } } }],
     }),
 

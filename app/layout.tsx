@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
-
+import { DM_Sans, Geist_Mono } from "next/font/google"
 import "./globals.css"
-
 import Footer from "../components/Footer/Footer"
+import ScrollToTop from "../components/ScrollToTop"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 })
 
 const geistMono = Geist_Mono({
@@ -27,17 +27,16 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="it"
+      className={`${dmSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full bg-black">
+        <ScrollToTop />
         <main className="main-bg relative z-10 min-h-screen rounded-b-[42px]">
           {children}
         </main>
-
         <div className="h-[100vh]" />
-
         <Footer />
       </body>
     </html>

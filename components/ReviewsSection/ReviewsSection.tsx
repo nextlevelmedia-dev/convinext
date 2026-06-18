@@ -46,7 +46,7 @@ function StarRating({ stars }: { stars: number }) {
 
 function ReviewCard({ review }: { review: Review }) {
   return (
-    <div className="review-card rounded-2xl p-5 mb-3 transition-all duration-300 hover:-translate-y-1">
+    <div className="review-card card-adaptive rounded-2xl p-5 mb-3">
       <StarRating stars={review.stars} />
 
       {review.reviewTitle && (

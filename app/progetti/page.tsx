@@ -24,20 +24,32 @@ type Project = {
 
 function ProjectCard({ project }: { project: Project }) {
   const imageUrl = project.image?.asset?.url
+  const Wrapper = project.href ? "a" : "div"
+
   return (
-    <div className="group rounded-3xl border border-slate-200 bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-slate-300">
+    <Wrapper
+      {...(project.href ? { href: project.href, target: "_blank", rel: "noopener noreferrer" } : {})}
+      className="card-adaptive group rounded-2xl block"
+    >
       {imageUrl && (
-        <div className="relative w-full aspect-[4/3] overflow-hidden">
-          <Image src={imageUrl} alt={project.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div className="p-3 pb-0">
+          <div className="relative w-full aspect-[4/3] overflow-hidden rounded-xl">
+            <Image
+              src={imageUrl}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
         </div>
       )}
       <div className="p-6">
-        <h3 className="text-xl font-black text-slate-950 mb-2">{project.title}</h3>
+        <h3 className="text-xl font-black text-slate-950 dark:text-white mb-2">{project.title}</h3>
         {project.description && (
-          <p className="text-sm font-semibold uppercase tracking-widest text-slate-400">{project.description}</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-slate-400 dark:text-white/40">{project.description}</p>
         )}
       </div>
-    </div>
+    </Wrapper>
   )
 }
 
@@ -56,7 +68,7 @@ export default async function ProgettiPage() {
             <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-16 items-start">
 
               <div className="lg:sticky lg:top-32">
-                <h1 className="text-4xl font-black leading-[1.2] tracking-tight text-slate-950 md:text-5xl mb-6">
+                <h1 className="text-4xl font-black leading-[1.2] tracking-tight text-slate-950 dark:text-white md:text-5xl mb-6">
                   {hero?.title}{" "}
                   {hero?.highlightOne && (
                     <span className="bg-brand-gradient bg-clip-text text-transparent">{hero.highlightOne}</span>
@@ -65,12 +77,12 @@ export default async function ProgettiPage() {
                 </h1>
 
                 {hero?.subtitle && (
-                  <p className="text-lg font-semibold leading-8 text-slate-800 mb-8">{hero.subtitle}</p>
+                  <p className="text-lg font-semibold leading-8 text-slate-800 dark:text-white/70 mb-8">{hero.subtitle}</p>
                 )}
 
-                <div className="pt-8 border-t border-slate-200 mb-8">
+                <div className="pt-8 border-t border-slate-200 dark:border-white/10 mb-8">
                   <div className="flex items-center gap-4">
-                    <p className="text-sm leading-6 text-slate-500 w-5/6">
+                    <p className="text-sm leading-6 text-slate-500 dark:text-white/50 w-5/6">
                       Alcuni di questi progetti sono stati realizzati per conto di Pixel Wave.
                     </p>
                     <div className="shrink-0 w-1/6">
@@ -90,7 +102,7 @@ export default async function ProgettiPage() {
                 )}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {projects.map((project, i) => (
                   <ProjectCard key={i} project={project} />
                 ))}

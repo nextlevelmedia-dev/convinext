@@ -21,7 +21,7 @@ function MarqueeRow({
 }: {
   items: MockupItem[]
   direction: "left" | "right"
-  rowRef: React.RefObject<HTMLDivElement>
+  rowRef: React.RefObject<HTMLDivElement | null>
 }) {
   const trackRef = useRef<HTMLDivElement>(null)
   const posRef = useRef(0)

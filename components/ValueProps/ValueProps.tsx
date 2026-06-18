@@ -3,6 +3,7 @@
 import Image from "next/image"
 import dynamic from "next/dynamic"
 import { urlFor } from "../../sanity/lib/image"
+import { ValuePropVisual } from "../ValuePropVisuals/ValuePropVisuals"
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false })
 const ThreeViewer = dynamic(() => import("../ThreeViewer/ThreeViewer"), { ssr: false })
@@ -14,12 +15,13 @@ interface ValuePropItem {
   subtitle?: string
   ctaText?: string
   ctaHref?: string
-  mediaType?: "image" | "video" | "lottie" | "3d"
+  mediaType?: "image" | "video" | "lottie" | "3d" | "component"
   image?: { asset: { _ref: string } }
   videoWebm?: string
   videoMp4?: string
   lottieFile?: string
   modelUrl?: string
+  componentKey?: string
 }
 
 interface ValuePropsProps {
@@ -27,6 +29,10 @@ interface ValuePropsProps {
 }
 
 function MediaBlock({ item }: { item: ValuePropItem }) {
+  if (item.mediaType === "component" && item.componentKey) {
+    return <ValuePropVisual visualKey={item.componentKey} />
+  }
+
   if (item.mediaType === "video" && (item.videoWebm || item.videoMp4)) {
     return (
       <div className="w-full rounded-2xl overflow-hidden aspect-video">
@@ -62,12 +68,12 @@ function MediaBlock({ item }: { item: ValuePropItem }) {
   }
 
   if (item.mediaType === "3d" && item.modelUrl) {
-  return (
-    <div className="w-full rounded-2xl" style={{ height: "400px" }}>
-      <ThreeViewer modelUrl={item.modelUrl} />
-    </div>
-  )
-}
+    return (
+      <div className="w-full rounded-2xl" style={{ height: "400px" }}>
+        <ThreeViewer modelUrl={item.modelUrl} />
+      </div>
+    )
+  }
 
   return (
     <div className="w-full rounded-2xl bg-slate-100 aspect-video flex items-center justify-center">
@@ -101,7 +107,7 @@ function ValuePropRow({ item, index }: { item: ValuePropItem; index: number }) {
           </h3>
         )}
         {item.subtitle && (
-          <p className="text-base leading-7 mb-8" style={{ color: "rgba(255,255,255,0.7)" }}>
+          <p className="text-lg leading-7 mb-8" style={{ color: "rgba(255,255,255,0.7)" }}>
             {item.subtitle}
           </p>
         )}

@@ -236,7 +236,8 @@ export default function ProcessSitiWeb({
 
         <div id="nlm-web-process-timeline" ref={rootRef}>
           <style>{`
-            #nlm-web-process-timeline{--grad-a:#fc03b0;--grad-b:#047cf9;--text:#0f172a;--muted:#64748b;--card:#ffffff;--card-border:rgba(15,23,42,.06);--shadow:0 18px 50px rgba(15,23,42,.08);--line-bg:rgba(4,124,249,.14);--radius:18px;--enter-y:26px;--enter-dur:620ms;--enter-ease:cubic-bezier(.2,.8,.2,1);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--text)}
+            #nlm-web-process-timeline{--grad-a:#fc03b0;--grad-b:#047cf9;--text:#0f172a;--muted:#64748b;--line-bg:rgba(4,124,249,.14);--radius:18px;--enter-y:26px;--enter-dur:620ms;--enter-ease:cubic-bezier(.2,.8,.2,1);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--text)}
+            .dark #nlm-web-process-timeline{--text:rgba(255,255,255,0.95);--muted:rgba(255,255,255,0.6);--line-bg:rgba(4,124,249,0.20)}
             #nlm-web-process-timeline *{box-sizing:border-box}
             #nlm-web-process-timeline .timeline{position:relative;padding:12px 0}
             #nlm-web-process-timeline .timeline::before{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:6px;height:100%;background:var(--line-bg);border-radius:999px}
@@ -250,22 +251,27 @@ export default function ProcessSitiWeb({
             #nlm-web-process-timeline .step[data-side="right"] .step__right{justify-content:flex-start}
             #nlm-web-process-timeline .step__middle{position:relative;height:100%;display:flex;justify-content:center}
             #nlm-web-process-timeline .step__dot{position:absolute;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:999px;background:rgba(4,124,249,.35);transition:opacity .25s ease,transform .25s ease;opacity:.35}
-            #nlm-web-process-timeline .card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;max-width:460px}
+            #nlm-web-process-timeline .card{padding:22px;max-width:460px;}
             #nlm-web-process-timeline .card__top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
             #nlm-web-process-timeline .badge{width:34px;height:34px;border-radius:10px;background:rgba(4,124,249,.10);display:grid;place-items:center;color:rgba(4,124,249,.95);font-weight:800;font-size:13px;flex:0 0 auto}
             #nlm-web-process-timeline .icon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(252,3,176,.12),rgba(4,124,249,.10));color:rgba(15,23,42,.9);border:1px solid rgba(15,23,42,.06);flex:0 0 auto}
+            .dark #nlm-web-process-timeline .icon{color:rgba(255,255,255,0.9);border-color:rgba(255,255,255,0.08)}
             #nlm-web-process-timeline .card h4{margin:0;font-size:24px;letter-spacing:-0.01em;line-height:1.2}
             #nlm-web-process-timeline .card p{margin:8px 0 0;line-height:1.65;font-size:18px;color:inherit}
             #nlm-web-process-timeline .graphic{border-radius:22px;overflow:hidden;border:1px solid rgba(15,23,42,.06);box-shadow:0 18px 60px rgba(15,23,42,.08);background:rgba(255,255,255,.85);max-width:520px;width:100%;min-width:0}
+            .dark #nlm-web-process-timeline .graphic{background-color:#111118;background-image:radial-gradient(ellipse at 10% 50%,rgba(252,3,176,0.12) 0%,transparent 50%),radial-gradient(ellipse at 90% 50%,rgba(4,124,249,0.08) 0%,transparent 50%);border:1px solid rgba(255,255,255,0.10);box-shadow:0 1px 0 0 rgba(255,255,255,0.12),inset 0 1px 0 rgba(255,255,255,0.08),inset 0 -1px 0 rgba(0,0,0,0.3)}
             #nlm-web-process-timeline .graphic__pad{padding:14px}
             #nlm-web-process-timeline .card,#nlm-web-process-timeline .graphic{opacity:0;transform:translateY(var(--enter-y));transition:opacity var(--enter-dur) var(--enter-ease),transform var(--enter-dur) var(--enter-ease);will-change:opacity,transform}
             #nlm-web-process-timeline .step .card{transition-delay:140ms}
             #nlm-web-process-timeline .step .graphic{transition-delay:260ms}
             #nlm-web-process-timeline .step.is-active .card,#nlm-web-process-timeline .step.is-active .graphic{opacity:1;transform:translateY(0)}
+            #nlm-web-process-timeline .step.is-active .card:hover{transform:translateY(-6px) scale(1.01)!important;}
             #nlm-web-process-timeline .step.is-active .step__dot{opacity:1;transform:translateY(-50%) scale(1.05)}
             #nlm-web-process-timeline .nx-map__stage{position:relative;isolation:isolate;border-radius:22px;padding:18px;min-height:360px;overflow:hidden;background:radial-gradient(1200px 500px at 50% 0%,rgba(92,106,255,.10),transparent 60%),radial-gradient(800px 520px at 85% 20%,rgba(236,0,140,.08),transparent 55%),rgba(255,255,255,.92);border:1px solid rgba(17,24,39,.06)}
+            .dark #nlm-web-process-timeline .nx-map__stage{background:#111118;border-color:rgba(255,255,255,0.08)}
             #nlm-web-process-timeline .nx-map__svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
             #nlm-web-process-timeline .nx-node{position:absolute;width:clamp(150px,18vw,175px);border-radius:16px;background:rgba(255,255,255,.92);border:1px solid rgba(17,24,39,.08);box-shadow:0 12px 40px rgba(17,24,39,.06);padding:10px;z-index:3;opacity:1!important;transform:none!important}
+            .dark #nlm-web-process-timeline .nx-node{background:#1a1a24;border-color:rgba(255,255,255,0.10);color:rgba(255,255,255,0.85)}
             #nlm-web-process-timeline .nx-node__chip{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;background:rgba(17,24,39,.04);border:1px solid rgba(17,24,39,.06);font-weight:800;font-size:12px;line-height:1;white-space:nowrap}
             #nlm-web-process-timeline .nx-node__chip--primary{background:linear-gradient(90deg,rgba(252,3,176,.14),rgba(4,124,249,.12));border:1px solid rgba(4,124,249,.14)}
             #nlm-web-process-timeline .nx-node__text{margin-top:6px;opacity:.78;font-size:12px;line-height:1.35}
@@ -275,67 +281,98 @@ export default function ProcessSitiWeb({
             #nlm-web-process-timeline .nx-node--d{right:4%;top:39%;width:clamp(150px,20vw,190px)}
             #nlm-web-process-timeline .nx-lines--glow .nx-line{stroke:rgba(92,106,255,.22);stroke-width:3.2;filter:blur(1.4px)}
             #nlm-web-process-timeline .nx-lines--crisp .nx-line{stroke:rgba(27,27,31,.42);stroke-width:1.4}
+            .dark #nlm-web-process-timeline .nx-lines--crisp .nx-line{stroke:rgba(255,255,255,.25)}
             #nlm-web-process-timeline .nx-line{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;opacity:1!important}
             #nlm-web-process-timeline .nx-pulse{position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:999px;transform:translate(-50%,-50%);background:rgba(92,106,255,.35);box-shadow:0 0 0 9px rgba(92,106,255,.08);z-index:2;opacity:1!important}
             #nlm-web-process-timeline .nx2-sitemap__canvas{border-radius:18px;background:rgba(255,255,255,.70);border:1px solid rgba(17,24,39,.06);box-shadow:0 12px 40px rgba(17,24,39,.06);padding:12px;overflow:hidden}
+            .dark #nlm-web-process-timeline .nx2-sitemap__canvas{background:#111118;border-color:rgba(255,255,255,0.08)}
             #nlm-web-process-timeline .nx2-tree{margin:0;padding:0;list-style:none;width:100%}
             #nlm-web-process-timeline .nx2-tree ul{margin:0;padding:0;list-style:none}
             #nlm-web-process-timeline .nx2-tree__root{display:flex;flex-direction:column;align-items:center;gap:12px;padding-top:2px;position:relative}
             #nlm-web-process-timeline .nx2-tree__level--top{display:flex;justify-content:space-between;gap:12px;width:100%;position:relative;padding-top:14px}
             #nlm-web-process-timeline .nx2-tree__level--top:before{content:"";position:absolute;left:6%;right:6%;top:5px;height:5px;background:rgba(17,24,39,.18);border-radius:999px;opacity:.55}
+            .dark #nlm-web-process-timeline .nx2-tree__level--top:before{background:rgba(255,255,255,.18)}
             #nlm-web-process-timeline .nx2-tree__branch{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:10px;position:relative;padding-top:8px}
             #nlm-web-process-timeline .nx2-tree__branch:before{content:"";position:absolute;top:-1px;width:7px;height:16px;background:rgba(17,24,39,.18);border-radius:999px;opacity:.55}
+            .dark #nlm-web-process-timeline .nx2-tree__branch:before{background:rgba(255,255,255,.18)}
             #nlm-web-process-timeline .nx2-tree__level--leaf{display:flex;flex-direction:column;gap:8px;width:100%;align-items:center;padding-top:8px;position:relative}
             #nlm-web-process-timeline .nx2-tree__level--leaf:before{content:"";position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:7px;height:16px;background:rgba(17,24,39,.18);border-radius:999px;opacity:.55}
+            .dark #nlm-web-process-timeline .nx2-tree__level--leaf:before{background:rgba(255,255,255,.18)}
             #nlm-web-process-timeline .nx2-node{display:inline-flex;align-items:center;justify-content:center;text-align:center;font-weight:800;padding:8px 10px;border-radius:12px;border:1px solid rgba(17,24,39,.08);background:rgba(255,255,255,.92);box-shadow:0 12px 40px rgba(17,24,39,.06);font-size:13px;line-height:1;min-width:0;max-width:100%;white-space:nowrap}
+            .dark #nlm-web-process-timeline .nx2-node{background:#1a1a24;border-color:rgba(255,255,255,0.10);color:rgba(255,255,255,0.85)}
             #nlm-web-process-timeline .nx2-node--root{font-size:16px;padding:9px 12px;border-radius:14px;border-color:rgba(4,124,249,.18);background:linear-gradient(180deg,rgba(4,124,249,.16),rgba(255,255,255,.92));position:relative}
+            .dark #nlm-web-process-timeline .nx2-node--root{background:linear-gradient(180deg,rgba(4,124,249,.25),#1a1a24)}
             #nlm-web-process-timeline .nx2-node--top{border-color:rgba(4,124,249,.16);background:rgba(4,124,249,.10)}
             #nlm-web-process-timeline .nx2-node--leaf{border-color:rgba(252,3,176,.18);background:rgba(252,3,176,.08)}
-            #nlm-web-process-timeline .nx3-proto__stage{position:relative;border-radius:22px;padding:clamp(14px,2.2vw,20px);overflow:hidden;background:radial-gradient(1200px 520px at 50% 0%,rgba(92,106,255,.10),transparent 60%),radial-gradient(820px 560px at 85% 20%,rgba(236,0,140,.08),transparent 55%),rgba(255,255,255,.92);border:1px solid rgba(17,24,39,.06);min-height:360px;display:flex;align-items:center;justify-content:center}
+            #nlm-web-process-timeline .nx3-proto__stage{position:relative;border-radius:22px;padding:clamp(14px,2.2vw,20px);overflow:hidden;background:rgba(255,255,255,.92);border:1px solid rgba(17,24,39,.06);min-height:360px;display:flex;align-items:center;justify-content:center}
+            .dark #nlm-web-process-timeline .nx3-proto__stage{background:#111118;border-color:rgba(255,255,255,0.08)}
             #nlm-web-process-timeline .nx3-device{position:relative;width:min(560px,100%);border-radius:22px;border:1px solid rgba(17,24,39,.10);background:rgba(255,255,255,.84);box-shadow:0 24px 90px rgba(17,24,39,.10);overflow:hidden;opacity:0;transform:translateY(14px);transition:opacity .6s var(--enter-ease),transform .6s var(--enter-ease);will-change:opacity,transform;contain:layout paint style}
+            .dark #nlm-web-process-timeline .nx3-device{background:#1a1a24;border-color:rgba(255,255,255,0.10)}
             #nlm-web-process-timeline .nx3-device.is-on{opacity:1;transform:translateY(0)}
             #nlm-web-process-timeline .nx3-device__top{display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid rgba(17,24,39,.08);background:rgba(255,255,255,.75);position:relative;z-index:4}
+            .dark #nlm-web-process-timeline .nx3-device__top{background:#111118;border-color:rgba(255,255,255,0.06)}
             #nlm-web-process-timeline .nx3-traffic{display:flex;gap:6px}
             #nlm-web-process-timeline .nx3-traffic span{width:10px;height:10px;border-radius:999px;background:rgba(17,24,39,.14)}
+            .dark #nlm-web-process-timeline .nx3-traffic span{background:rgba(255,255,255,.20)}
             #nlm-web-process-timeline .nx3-url{flex:1;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:999px;border:1px solid rgba(17,24,39,.08);background:rgba(17,24,39,.03);overflow:hidden}
+            .dark #nlm-web-process-timeline .nx3-url{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.10)}
             #nlm-web-process-timeline .nx3-url__text{opacity:.72;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
             #nlm-web-process-timeline .nx3-signal{width:18px;height:10px;border-radius:999px;background:rgba(17,24,39,.08)}
-            #nlm-web-process-timeline .nx3-screen{position:relative;height:320px;overflow:hidden;background:radial-gradient(600px 320px at 30% 10%,rgba(92,106,255,.10),transparent 55%),rgba(255,255,255,.92)}
+            .dark #nlm-web-process-timeline .nx3-signal{background:rgba(255,255,255,.15)}
+            #nlm-web-process-timeline .nx3-screen{position:relative;height:320px;overflow:hidden;background:rgba(255,255,255,.92)}
+            .dark #nlm-web-process-timeline .nx3-screen{background:#111118}
             #nlm-web-process-timeline .nx3-state{position:absolute;inset:0;padding:16px;overflow:hidden}
             #nlm-web-process-timeline .nx3-state--skeleton{z-index:1;transition:opacity .35s ease}
             #nlm-web-process-timeline .nx3-state--live{z-index:2;opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease;will-change:opacity,transform}
             #nlm-web-process-timeline .nx3-device.is-live .nx3-state--skeleton{opacity:0}
             #nlm-web-process-timeline .nx3-device.is-live .nx3-state--live{opacity:1;transform:translateY(0)}
             #nlm-web-process-timeline .nx3-skel{border-radius:14px;background:rgba(17,24,39,.06);margin-bottom:10px;height:12px}
+            .dark #nlm-web-process-timeline .nx3-skel{background:rgba(255,255,255,.08)}
             #nlm-web-process-timeline .nx3-skel.hero{height:96px;border-radius:18px;background:rgba(17,24,39,.05)}
+            .dark #nlm-web-process-timeline .nx3-skel.hero{background:rgba(255,255,255,.06)}
             #nlm-web-process-timeline .nx3-skel.card{height:54px;background:rgba(17,24,39,.05)}
             #nlm-web-process-timeline .nx3-skel.card.small{height:42px}
             #nlm-web-process-timeline .w70{width:70%}
             #nlm-web-process-timeline .nx3-live__header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid rgba(17,24,39,.08);border-radius:18px;background:rgba(255,255,255,.75);margin-bottom:12px}
+            .dark #nlm-web-process-timeline .nx3-live__header{background:#1a1a24;border-color:rgba(255,255,255,.08)}
             #nlm-web-process-timeline .nx3-live__logo{width:28px;height:28px;border-radius:10px;background:rgba(17,24,39,.08)}
+            .dark #nlm-web-process-timeline .nx3-live__logo{background:rgba(255,255,255,.12)}
             #nlm-web-process-timeline .nx3-live__nav{display:flex;gap:8px;flex:1;justify-content:center}
             #nlm-web-process-timeline .nx3-live__nav span{width:44px;height:10px;border-radius:999px;background:rgba(17,24,39,.06)}
+            .dark #nlm-web-process-timeline .nx3-live__nav span{background:rgba(255,255,255,.10)}
             #nlm-web-process-timeline .nx3-live__cta{width:72px;height:12px;border-radius:999px;background:linear-gradient(90deg,rgba(236,0,140,.22),rgba(92,106,255,.22));border:1px solid rgba(92,106,255,.14)}
             #nlm-web-process-timeline .nx3-live__viewport{position:relative;height:calc(100% - 68px);overflow:hidden;border-radius:18px;border:1px solid rgba(17,24,39,.06);background:rgba(255,255,255,.72)}
+            .dark #nlm-web-process-timeline .nx3-live__viewport{background:#111118;border-color:rgba(255,255,255,.06)}
             #nlm-web-process-timeline .nx3-live__content{transform:translate3d(0,0,0);will-change:transform}
             #nlm-web-process-timeline .nx3-live__content > *{padding:14px}
-            #nlm-web-process-timeline .nx3-live__hero{padding:16px 14px;background:radial-gradient(520px 220px at 20% 0%,rgba(92,106,255,.12),transparent 60%),rgba(255,255,255,.78);border-bottom:1px solid rgba(17,24,39,.06)}
+            #nlm-web-process-timeline .nx3-live__hero{padding:16px 14px;background:rgba(255,255,255,.78);border-bottom:1px solid rgba(17,24,39,.06)}
+            .dark #nlm-web-process-timeline .nx3-live__hero{background:#1a1a24;border-color:rgba(255,255,255,.06)}
             #nlm-web-process-timeline .nx3-live__h1{height:16px;width:58%;border-radius:999px;background:rgba(17,24,39,.08);margin-bottom:12px}
+            .dark #nlm-web-process-timeline .nx3-live__h1{background:rgba(255,255,255,.15)}
             #nlm-web-process-timeline .nx3-live__p{height:11px;width:86%;border-radius:999px;background:rgba(17,24,39,.06);margin-bottom:10px}
+            .dark #nlm-web-process-timeline .nx3-live__p{background:rgba(255,255,255,.08)}
             #nlm-web-process-timeline .nx3-live__btns{display:flex;gap:10px;margin-top:12px}
             #nlm-web-process-timeline .nx3-live__btn{width:92px;height:14px;border-radius:999px;background:linear-gradient(90deg,rgba(236,0,140,.20),rgba(92,106,255,.20));border:1px solid rgba(92,106,255,.12)}
             #nlm-web-process-timeline .nx3-live__btn.ghost{background:rgba(17,24,39,.04);border:1px solid rgba(17,24,39,.08)}
+            .dark #nlm-web-process-timeline .nx3-live__btn.ghost{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.10)}
             #nlm-web-process-timeline .nx3-live__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border-bottom:1px solid rgba(17,24,39,.06);background:rgba(255,255,255,.72)}
+            .dark #nlm-web-process-timeline .nx3-live__grid{background:#111118;border-color:rgba(255,255,255,.06)}
             #nlm-web-process-timeline .nx3-live__tile{height:70px;border-radius:16px;background:rgba(17,24,39,.05);border:1px solid rgba(17,24,39,.06)}
+            .dark #nlm-web-process-timeline .nx3-live__tile{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08)}
             #nlm-web-process-timeline .nx3-live__section{border-bottom:1px solid rgba(17,24,39,.06);background:rgba(255,255,255,.74)}
+            .dark #nlm-web-process-timeline .nx3-live__section{background:#1a1a24;border-color:rgba(255,255,255,.06)}
             #nlm-web-process-timeline .nx3-live__k{height:12px;width:30%;border-radius:999px;background:rgba(17,24,39,.07);margin-bottom:12px}
+            .dark #nlm-web-process-timeline .nx3-live__k{background:rgba(255,255,255,.12)}
             #nlm-web-process-timeline .nx3-live__footer{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:rgba(17,24,39,.02)}
+            .dark #nlm-web-process-timeline .nx3-live__footer{background:#111118}
             #nlm-web-process-timeline .nx3-live__fcol{height:64px;border-radius:16px;background:rgba(17,24,39,.04);border:1px solid rgba(17,24,39,.06)}
+            .dark #nlm-web-process-timeline .nx3-live__fcol{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08)}
             #nlm-web-process-timeline .nx3-cursor{position:absolute;width:10px;height:10px;border-radius:999px;background:rgba(92,106,255,.28);box-shadow:0 0 0 10px rgba(92,106,255,.08);top:140px;left:60%;opacity:0;transform:translate(-50%,-50%);will-change:left,top,opacity;pointer-events:none;z-index:3}
             #nlm-web-process-timeline .nx3-touch{position:absolute;width:10px;height:10px;border-radius:999px;border:1px solid rgba(92,106,255,.22);top:140px;left:60%;opacity:0;transform:translate(-50%,-50%) scale(0.6);pointer-events:none;z-index:2;will-change:left,top,opacity,transform}
             #nlm-web-process-timeline .nx3-shine{position:absolute;inset:-40% -30%;background:radial-gradient(closest-side,rgba(255,255,255,.32),transparent 70%);transform:translate(-30%,-20%) rotate(12deg);opacity:0;pointer-events:none;z-index:1;transition:opacity .6s ease}
             #nlm-web-process-timeline .nx3-device.is-on .nx3-shine{opacity:.18}
             #nlm-web-process-timeline .nx3-device__badge{position:absolute;right:12px;bottom:12px;padding:8px 10px;border-radius:999px;border:1px solid rgba(17,24,39,.10);background:rgba(255,255,255,.75);box-shadow:0 12px 40px rgba(17,24,39,.08);display:flex;gap:8px;align-items:center;font-weight:700;z-index:5;opacity:0;transform:translateY(10px);transition:opacity .55s var(--enter-ease),transform .55s var(--enter-ease);transition-delay:220ms}
+            .dark #nlm-web-process-timeline .nx3-device__badge{background:#1a1a24;border-color:rgba(255,255,255,.10)}
             #nlm-web-process-timeline .nx3-device.is-on .nx3-device__badge{opacity:1;transform:translateY(0)}
             #nlm-web-process-timeline .nx3-badge-dot{width:8px;height:8px;border-radius:999px;background:linear-gradient(90deg,rgba(252,3,176,.85),rgba(4,124,249,.85));box-shadow:0 8px 20px rgba(4,124,249,.18)}
             @media(max-width:900px){
@@ -357,7 +394,7 @@ export default function ProcessSitiWeb({
             {/* STEP 1 */}
             <div className="step" data-step data-side="left">
               <div className="step__left">
-                <div className="card">
+                <div className="card card-adaptive rounded-2xl">
                   <div className="card__top">
                     <div className="badge">01</div>
                     <div className="icon">
@@ -448,7 +485,7 @@ export default function ProcessSitiWeb({
               </div>
               <div className="step__middle"><div className="step__dot"></div></div>
               <div className="step__right">
-                <div className="card">
+                <div className="card card-adaptive rounded-2xl">
                   <div className="card__top">
                     <div className="badge">02</div>
                     <div className="icon">
@@ -467,7 +504,7 @@ export default function ProcessSitiWeb({
             {/* STEP 3 */}
             <div className="step" data-step data-side="left" data-step3="">
               <div className="step__left">
-                <div className="card">
+                <div className="card card-adaptive rounded-2xl">
                   <div className="card__top">
                     <div className="badge">03</div>
                     <div className="icon">

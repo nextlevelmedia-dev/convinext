@@ -60,7 +60,7 @@ export default function ImpactSection({
             </h2>
           )}
           {subtitle && (
-            <p className="text-base leading-7 text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+            <p className="text-lg leading-7 text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
               {subtitle}
             </p>
           )}

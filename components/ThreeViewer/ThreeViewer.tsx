@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from "react"
 import * as THREE from "three"
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js"
 
 interface ThreeViewerProps {
   modelUrl: string
@@ -33,7 +33,7 @@ export default function ThreeViewer({ modelUrl }: ThreeViewerProps) {
     renderer.setClearColor(0x000000, 0)
     renderer.outputColorSpace = THREE.SRGBColorSpace
 renderer.toneMapping = THREE.ACESFilmicToneMapping
-renderer.useLegacyLights = false
+
 
     const scene = new THREE.Scene()
     scene.background = null

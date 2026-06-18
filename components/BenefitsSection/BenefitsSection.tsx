@@ -31,9 +31,9 @@ export default function BenefitsSection({ titleHighlight, titleNormal, items, ct
             </h2>
           </div>
         )}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {items.map((item, i) => (
-            <div key={i} className="benefit-card rounded-2xl p-8 transition-all duration-300 hover:-translate-y-2">
+            <div key={i} className="benefit-card card-adaptive rounded-2xl p-8">
               {item.image && (
                 <div className="mb-6">
                   <Image src={urlFor(item.image).width(1080).height(1080).url()} alt={item.title} width={64} height={64} className="object-contain" />

@@ -173,11 +173,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <ProjectCarousel
-          ctaLabel={page?.homeProjects?.ctaLabel}
-          ctaText={page?.homeProjects?.ctaText}
-          ctaHref={page?.homeProjects?.ctaHref}
-        />
+        <ProjectCarousel />
 
         <TeamCards {...page?.teamCards} />
 
