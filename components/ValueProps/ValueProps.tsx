@@ -6,7 +6,7 @@ import { urlFor } from "../../sanity/lib/image"
 import { ValuePropVisual } from "../ValuePropVisuals/ValuePropVisuals"
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false })
-const ThreeViewer = dynamic(() => import("../ThreeViewer/ThreeViewer"), { ssr: false })
+
 
 interface ValuePropItem {
   label?: string
@@ -67,13 +67,7 @@ function MediaBlock({ item }: { item: ValuePropItem }) {
     )
   }
 
-  if (item.mediaType === "3d" && item.modelUrl) {
-    return (
-      <div className="w-full rounded-2xl" style={{ height: "400px" }}>
-        <ThreeViewer modelUrl={item.modelUrl} />
-      </div>
-    )
-  }
+ 
 
   return (
     <div className="w-full rounded-2xl bg-slate-100 aspect-video flex items-center justify-center">
