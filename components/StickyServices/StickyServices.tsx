@@ -108,7 +108,7 @@ function LazyLottie({ file }: { file: string }) {
     return () => observer.disconnect()
   }, [file])
 
-  return <div ref={ref} ref={lottieRef} className="stack-lottie-wrapper" />
+  return <div ref={lottieRef} className="stack-lottie-wrapper" />
 }
 
 function ServiceMedia({ service }: { service: Service }) {
