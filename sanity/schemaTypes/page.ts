@@ -171,8 +171,8 @@ export const pageType = defineType({
           ], layout: "radio" },
         }),
         defineField({ name: "image", title: "Immagine", type: "image", options: { hotspot: true } }),
-        defineField({ name: "videoWebm", title: "Video .webm (URL)", type: "url" }),
-        defineField({ name: "videoMp4", title: "Video .mp4 (URL)", type: "url" }),
+        defineField({ name: "videoWebm", title: "Video .webm", type: "file", options: { accept: "video/webm" } }),
+        defineField({ name: "videoMp4", title: "Video .mp4", type: "file", options: { accept: "video/mp4" } }),
         defineField({ name: "lottieFile", title: "Nome file Lottie (es: Work-Chat.json)", type: "string" }),
         defineField({ name: "modelUrl", title: "URL modello 3D (.glb)", type: "string" }),
         defineField({ name: "componentKey", title: "Component Key (es: cro-analisi)", type: "string" }),
@@ -268,15 +268,47 @@ export const pageType = defineType({
     }),
 
     // ─── STICKY SERVICES (solo Home) ───────────────────────────────────────────
+defineField({
+  name: "stickyServices", title: "Sezione Servizi Sticky", type: "object", fieldset: "stickyServicesSection",
+  hidden: ({ document }) => !isHomePage(document),
+  fields: [
+    defineField({ name: "titleHighlight", title: "Titolo - parte evidenziata (gradient)", type: "string" }),
+    defineField({ name: "titleNormal", title: "Titolo - parte normale", type: "string" }),
+    defineField({ name: "subtitle", title: "Sottotitolo", type: "text", rows: 3 }),
     defineField({
-      name: "stickyServices", title: "Sezione Servizi Sticky", type: "object", fieldset: "stickyServicesSection",
-      hidden: ({ document }) => !isHomePage(document),
-      fields: [
-        defineField({ name: "titleHighlight", title: "Titolo - parte evidenziata (gradient)", type: "string" }),
-        defineField({ name: "titleNormal", title: "Titolo - parte normale", type: "string" }),
-        defineField({ name: "subtitle", title: "Sottotitolo", type: "text", rows: 3 }),
-      ],
+      name: "cards", title: "Card servizi", type: "array",
+      of: [{
+        type: "object",
+        fields: [
+          defineField({ name: "label", title: "Label (es: Ecommerce Solutions)", type: "string" }),
+          defineField({ name: "title", title: "Titolo card", type: "string" }),
+          defineField({ name: "text", title: "Testo", type: "text", rows: 3 }),
+          defineField({ name: "cta", title: "Testo bottone", type: "string" }),
+          defineField({ name: "href", title: "Link bottone", type: "string" }),
+          defineField({
+            name: "mediaType", title: "Tipo media", type: "string",
+            options: {
+              list: [
+                { title: "Video", value: "video" },
+                { title: "Immagine", value: "image" },
+                { title: "Lottie", value: "lottie" },
+              ],
+              layout: "radio",
+            },
+          }),
+          defineField({ name: "videoWebm", title: "Video .webm (URL)", type: "url" }),
+          defineField({ name: "videoMp4", title: "Video .mp4 (URL)", type: "url" }),
+          defineField({ name: "image", title: "Immagine", type: "image", options: { hotspot: true } }),
+          defineField({ name: "lottieFile", title: "Nome file Lottie (es: Stats-Going-Up.json)", type: "string" }),
+        ],
+        preview: {
+          select: { title: "title", subtitle: "label", media: "image" },
+          prepare({ title, subtitle, media }: any) { return { title, subtitle, media } },
+        },
+      }],
     }),
+  ],
+}),
 
     // ─── TEAM CARDS (solo Home) ────────────────────────────────────────────────
     defineField({

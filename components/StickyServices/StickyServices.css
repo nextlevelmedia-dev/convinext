@@ -194,3 +194,16 @@
     max-height: 260px;
   }
 }
+
+.stack-video-wrapper {
+  width: 100%;
+  max-width: 520px;
+}
+
+.stack-lottie-wrapper {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

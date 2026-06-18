@@ -26,7 +26,8 @@ const fallbackServices = [
     text: "Genera più ricavi dagli stessi visitatori migliorando conversioni e performance.",
     cta: "Ottieni di più dal tuo traffico",
     href: "/ottimizzazione-conversioni",
-    lottie: "Stats-Going-Up (1).json",
+    mediaType: "lottie",
+lottieFile: "Stats-Going-Up (1).json",
   },
   {
     label: "Web Performance",
@@ -78,10 +79,22 @@ const query = `*[_type == "page" && slug.current == "home"][0]{
     lottieFile
   },
   stickyServices{
-    titleHighlight,
-    titleNormal,
-    subtitle
-  },
+  titleHighlight,
+  titleNormal,
+  subtitle,
+  cards[]{
+    label,
+    title,
+    text,
+    cta,
+    href,
+    mediaType,
+    videoWebm,
+    videoMp4,
+    image{ asset->{ _id, url } },
+    lottieFile
+  }
+},
   teamCards{
     titleHighlight,
     titleNormal,
@@ -145,11 +158,11 @@ export default async function Home() {
         <ValueProps items={page?.valueProps} />
 
         <StickyServices
-          titleHighlight={page?.stickyServices?.titleHighlight}
-          titleNormal={page?.stickyServices?.titleNormal}
-          subtitle={page?.stickyServices?.subtitle}
-          services={fallbackServices}
-        />
+  titleHighlight={page?.stickyServices?.titleHighlight}
+  titleNormal={page?.stickyServices?.titleNormal}
+  subtitle={page?.stickyServices?.subtitle}
+  services={page?.stickyServices?.cards ?? fallbackServices}
+/>
 
         <section className="px-6 pt-24 text-center text-slate-950">
           <div className="mx-auto max-w-2xl">
