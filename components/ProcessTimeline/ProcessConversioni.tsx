@@ -316,15 +316,40 @@ export default function ProcessConversioni({
             #nlm-cro-process-timeline .nx3-device.is-on .nx3-device__badge{opacity:1;transform:translateY(0)}
             #nlm-cro-process-timeline .nx3-badge-dot{width:8px;height:8px;border-radius:999px;background:linear-gradient(90deg,rgba(252,3,176,.85),rgba(4,124,249,.85));box-shadow:0 8px 20px rgba(4,124,249,.18)}
             @media(max-width:900px){
-              #nlm-cro-process-timeline .step{grid-template-columns:40px 1fr;gap:14px;padding:22px 0;min-height:auto}
-              #nlm-cro-process-timeline .timeline::before,#nlm-cro-process-timeline .timeline__progress{left:20px;transform:none}
-              #nlm-cro-process-timeline .timeline__tracker{left:20px;transform:translate(-50%,-50%)}
-              #nlm-cro-process-timeline .step__middle{grid-column:1}
-              #nlm-cro-process-timeline .step__left,#nlm-cro-process-timeline .step__right{grid-column:2;justify-content:flex-start!important}
-              #nlm-cro-process-timeline .card,#nlm-cro-process-timeline .graphic{max-width:100%;width:100%}
-              #nlm-cro-process-timeline .step[data-side="right"] .step__right{order:1}
-              #nlm-cro-process-timeline .step[data-side="right"] .step__left{order:2}
-            }
+  #nlm-cro-process-timeline .timeline::before,
+  #nlm-cro-process-timeline .timeline__progress,
+  #nlm-cro-process-timeline .timeline__tracker,
+  #nlm-cro-process-timeline .step__middle{
+    display:none;
+  }
+
+  #nlm-cro-process-timeline .step{
+    grid-template-columns:1fr;
+    gap:14px;
+    padding:22px 0;
+    min-height:auto;
+  }
+
+  #nlm-cro-process-timeline .step__left,
+  #nlm-cro-process-timeline .step__right{
+    grid-column:auto;
+    justify-content:flex-start!important;
+  }
+
+  #nlm-cro-process-timeline .card,
+  #nlm-cro-process-timeline .graphic{
+    max-width:100%;
+    width:100%;
+  }
+
+  #nlm-cro-process-timeline .step[data-side="right"] .step__right{
+    order:1;
+  }
+
+  #nlm-cro-process-timeline .step[data-side="right"] .step__left{
+    order:2;
+  }
+}
           `}</style>
 
           <div className="timeline" data-timeline>
