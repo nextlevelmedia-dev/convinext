@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import dynamic from "next/dynamic"
 import "./StickyServices.css"
 
@@ -81,34 +81,47 @@ function LazyVideo({ webm, mp4 }: { webm?: string; mp4?: string }) {
 
 function LazyLottie({ file }: { file: string }) {
   const ref = useRef<HTMLDivElement>(null)
-  const loaded = useRef(false)
-  const lottieRef = useRef<any>(null)
+  const [animationData, setAnimationData] = useState<any>(null)
+  const [shouldLoad, setShouldLoad] = useState(false)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
-
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !loaded.current) {
-          loaded.current = true
-          import(`../../public/lotties/${file}`).then((data) => {
-            if (!lottieRef.current) return
-            lottieRef.current.innerHTML = ""
-            const LottiePlayer = document.createElement("div")
-            el.appendChild(LottiePlayer)
-          })
+        if (entry.isIntersecting) {
+          setShouldLoad(true)
           observer.disconnect()
         }
       },
       { rootMargin: "200px" }
     )
-
     observer.observe(el)
     return () => observer.disconnect()
-  }, [file])
+  }, [])
 
-  return <div ref={lottieRef} className="stack-lottie-wrapper" />
+  useEffect(() => {
+    if (!shouldLoad || !file) return
+    let cancelled = false
+    fetch(`/lotties/${file}`)
+      .then((res) => res.json())
+      .then((data) => { if (!cancelled) setAnimationData(data) })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [shouldLoad, file])
+
+  return (
+    <div ref={ref} className="stack-lottie-wrapper">
+      {animationData && (
+        <Lottie
+          animationData={animationData}
+          loop
+          autoplay
+          style={{ width: "100%", maxWidth: 380 }}
+        />
+      )}
+    </div>
+  )
 }
 
 function ServiceMedia({ service }: { service: Service }) {
@@ -129,16 +142,7 @@ function ServiceMedia({ service }: { service: Service }) {
   }
 
   if (service.mediaType === "lottie" && service.lottieFile) {
-    return (
-      <div className="stack-lottie-wrapper">
-        <Lottie
-          animationData={undefined}
-          loop
-          autoplay={false}
-          style={{ width: "100%", maxWidth: 380 }}
-        />
-      </div>
-    )
+    return <LazyLottie file={service.lottieFile} />
   }
 
   return null

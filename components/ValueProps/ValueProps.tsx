@@ -110,17 +110,14 @@ function LazyLottie({ file }: { file: string }) {
   useEffect(() => {
     let cancelled = false
 
-    import(`../../public/lotties/${file}`)
-      .then((mod) => {
-        if (!cancelled) setAnimationData(mod.default ?? mod)
+    fetch(`/lotties/${file}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!cancelled) setAnimationData(data)
       })
-      .catch(() => {
-        if (!cancelled) setAnimationData(null)
-      })
+      .catch(() => {})
 
-    return () => {
-      cancelled = true
-    }
+    return () => { cancelled = true }
   }, [file])
 
   if (!animationData) return null

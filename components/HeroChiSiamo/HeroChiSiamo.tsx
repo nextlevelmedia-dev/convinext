@@ -1,15 +1,9 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import dynamic from "next/dynamic"
-import softwareDev from "../../public/lotties/Software-Development.json"
-import team from "../../public/lotties/Team.json"
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false })
-
-const lottieMap: Record<string, object> = {
-  "Software-Development.json": softwareDev,
-  "Team.json": team,
-}
 
 type HeroChiSiamoProps = {
   eyebrow?: string
@@ -30,9 +24,18 @@ export default function HeroChiSiamo({
   highlightTwo,
   subtitle,
   ctaText,
-  lottieFile,
+  lottieFile = "Team.json",
 }: HeroChiSiamoProps) {
-  const animationData = (lottieFile && lottieMap[lottieFile]) ? lottieMap[lottieFile] : team
+  const [animationData, setAnimationData] = useState<any>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    fetch(`/lotties/${lottieFile}`)
+      .then((res) => res.json())
+      .then((data) => { if (!cancelled) setAnimationData(data) })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [lottieFile])
 
   return (
     <>
@@ -76,12 +79,14 @@ export default function HeroChiSiamo({
           </div>
 
           <div className="flex items-center justify-center">
-            <Lottie
-              animationData={animationData}
-              loop
-              autoplay
-              style={{ width: "100%", maxWidth: 480 }}
-            />
+            {animationData && (
+              <Lottie
+                animationData={animationData}
+                loop
+                autoplay
+                style={{ width: "100%", maxWidth: 480 }}
+              />
+            )}
           </div>
 
         </div>

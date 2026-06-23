@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import dynamic from "next/dynamic"
 import { PortableText } from "@portabletext/react"
 
@@ -19,12 +20,17 @@ interface TeamCardsProps {
 }
 
 function TeamCard({ card, large }: { card: Card; large?: boolean }) {
-  let animationData = null
-  try {
-    animationData = require(`../../public/lotties/${card.lottieFile}`)
-  } catch {
-    animationData = null
-  }
+  const [animationData, setAnimationData] = useState<any>(null)
+
+  useEffect(() => {
+    if (!card.lottieFile) return
+    let cancelled = false
+    fetch(`/lotties/${card.lottieFile}`)
+      .then((res) => res.json())
+      .then((data) => { if (!cancelled) setAnimationData(data) })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [card.lottieFile])
 
   return (
     <div className={`team-card card-adaptive rounded-2xl p-8 ${large ? "team-card--large" : ""}`}>

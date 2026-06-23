@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import dynamic from "next/dynamic"
 import { urlFor } from "../../sanity/lib/image"
@@ -23,6 +24,18 @@ interface FinalRecapProps {
 }
 
 function MediaBlock({ mediaType, image, videoWebm, videoMp4, lottieFile }: Partial<FinalRecapProps>) {
+  const [animationData, setAnimationData] = useState<any>(null)
+
+  useEffect(() => {
+    if (mediaType !== "lottie" || !lottieFile) return
+    let cancelled = false
+    fetch(`/lotties/${lottieFile}`)
+      .then((res) => res.json())
+      .then((data) => { if (!cancelled) setAnimationData(data) })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [mediaType, lottieFile])
+
   if (mediaType === "video" && (videoWebm || videoMp4)) {
     return (
       <video autoPlay muted loop playsInline className="w-full h-full object-cover rounded-2xl">
@@ -33,10 +46,11 @@ function MediaBlock({ mediaType, image, videoWebm, videoMp4, lottieFile }: Parti
   }
 
   if (mediaType === "lottie" && lottieFile) {
-    const lottieData = require(`../../public/lotties/${lottieFile}`)
     return (
       <div className="w-full h-full flex items-center justify-center">
-        <Lottie animationData={lottieData} loop style={{ width: "100%", height: "100%" }} />
+        {animationData && (
+          <Lottie animationData={animationData} loop style={{ width: "100%", height: "100%" }} />
+        )}
       </div>
     )
   }
