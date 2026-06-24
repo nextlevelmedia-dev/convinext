@@ -33,7 +33,7 @@ export default function ImpactSection({
       const opacity = progress
       const translateY = 60 - progress * 60
 
-      el.style.transform = `scale(${scale}) translateY(${translateY}px)`
+      el.style.transform = `scale(${scale}) translateY(${translateY}px) translateZ(0)`
       el.style.opacity = `${opacity}`
     }
 
@@ -78,11 +78,10 @@ export default function ImpactSection({
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
                 opacity: 0,
-                transform: "scale(1.3) translateY(60px)",
+                transform: "scale(1.3) translateY(60px) translateZ(0)",
                 willChange: "transform, opacity",
-transition: "none",
-contain: "layout style",
-transform: "translateZ(0)",
+                transition: "none",
+                contain: "layout style",
               }}
             >
               {impactText}
