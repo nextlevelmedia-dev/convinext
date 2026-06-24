@@ -49,9 +49,9 @@ export default function Header() {
         onClick={closeDrawer}
       />
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer — full screen */}
       <div
-        className={`fixed top-0 right-0 z-[70] h-full w-[85vw] max-w-sm bg-white dark:bg-[#111118] shadow-2xl md:hidden transition-transform duration-300 ease-in-out ${mobileOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed inset-0 z-[70] bg-white dark:bg-[#111118] shadow-2xl md:hidden transition-transform duration-300 ease-in-out ${mobileOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex h-20 items-center justify-between px-6 border-b border-slate-200 dark:border-slate-700">
           <Image src="/logo.webp" alt="Next Level Media" width={80} height={32} priority />
@@ -77,7 +77,7 @@ export default function Header() {
               <Link
                 href="/ecommerce"
                 onClick={closeDrawer}
-                className="flex items-center gap-3 py-2.5 text-base font-medium text-slate-700 dark:text-white/80 hover:text-slate-900 dark:hover:text-white"
+                className="flex items-center gap-3 py-2.5 text-base font-medium text-slate-700 dark:text-white/80"
               >
                 <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#fc03b0] to-[#047cf9]">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -89,7 +89,7 @@ export default function Header() {
               <Link
                 href="/ottimizzazione-conversioni"
                 onClick={closeDrawer}
-                className="flex items-center gap-3 py-2.5 text-base font-medium text-slate-700 dark:text-white/80 hover:text-slate-900 dark:hover:text-white"
+                className="flex items-center gap-3 py-2.5 text-base font-medium text-slate-700 dark:text-white/80"
               >
                 <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#fc03b0] to-[#047cf9]">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -101,7 +101,7 @@ export default function Header() {
               <Link
                 href="/siti-web"
                 onClick={closeDrawer}
-                className="flex items-center gap-3 py-2.5 text-base font-medium text-slate-700 dark:text-white/80 hover:text-slate-900 dark:hover:text-white"
+                className="flex items-center gap-3 py-2.5 text-base font-medium text-slate-700 dark:text-white/80"
               >
                 <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#fc03b0] to-[#047cf9]">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -124,6 +124,10 @@ export default function Header() {
             <Link href="/contatti" onClick={closeDrawer} className="flex w-full items-center justify-center rounded-full bg-brand-gradient px-8 py-4 text-base font-bold text-white shadow-lg">
               Contattaci →
             </Link>
+          </div>
+
+          <div className="mt-4 flex justify-center">
+            <ThemeToggle />
           </div>
         </div>
       </div>
@@ -170,17 +174,17 @@ export default function Header() {
             <ThemeToggle />
           </div>
 
-          {/* Hamburger mobile */}
+          {/* Hamburger senza bubble */}
           <div className="flex items-center md:hidden">
             <button
               onClick={() => setMobileOpen(true)}
               aria-label="Apri menu"
               aria-expanded={mobileOpen}
-              className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full border border-slate-200 dark:border-slate-700"
+              className="flex flex-col items-center justify-center gap-[5px] p-2"
             >
-              <span className="block h-[2px] w-5 bg-slate-700 dark:bg-white rounded-full" />
-              <span className="block h-[2px] w-5 bg-slate-700 dark:bg-white rounded-full" />
-              <span className="block h-[2px] w-5 bg-slate-700 dark:bg-white rounded-full" />
+              <span className="block h-[2px] w-6 bg-slate-700 dark:bg-white rounded-full" />
+              <span className="block h-[2px] w-6 bg-slate-700 dark:bg-white rounded-full" />
+              <span className="block h-[2px] w-6 bg-slate-700 dark:bg-white rounded-full" />
             </button>
           </div>
 
