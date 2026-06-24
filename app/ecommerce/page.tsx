@@ -11,6 +11,7 @@ import FinalRecap from "@/components/FinalRecap/FinalRecap"
 import FaqSection from "@/components/FaqSection/FaqSection"
 import ContactSection from "@/components/ContactSection/ContactSection"
 import { client } from "@/sanity/lib/client"
+import { urlFor } from "@/sanity/lib/image"
 
 const query = `*[_type == "page" && slug.current == "ecommerce"][0]{
   hero,
@@ -103,15 +104,13 @@ const query = `*[_type == "page" && slug.current == "ecommerce"][0]{
 export default async function EcommercePage() {
   const page = await client.fetch(query)
 
-  import { urlFor } from "@/sanity/lib/image"
-
-const mockupSlides = page?.mockupSlides
-  ?.filter((s: any) => s?.imac?.asset && s?.tablet?.asset && s?.mobile?.asset)
-  .map((s: any) => ({
-    imac: urlFor(s.imac).width(1280).height(800).format("webp").url(),
-    tablet: urlFor(s.tablet).width(800).height(600).format("webp").url(),
-    mobile: urlFor(s.mobile).width(390).height(844).format("webp").url(),
-  }))
+  const mockupSlides = page?.mockupSlides
+    ?.filter((s: any) => s?.imac?.asset && s?.tablet?.asset && s?.mobile?.asset)
+    .map((s: any) => ({
+      imac: urlFor(s.imac).width(1280).height(800).format("webp").url(),
+      tablet: urlFor(s.tablet).width(800).height(600).format("webp").url(),
+      mobile: urlFor(s.mobile).width(390).height(844).format("webp").url(),
+    }))
 
   return (
     <>
