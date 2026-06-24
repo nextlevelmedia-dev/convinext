@@ -111,6 +111,7 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
             alt="iMac frame"
             width={620}
             height={520}
+            fetchPriority="high"
           />
           <div className="screen">
             <img
@@ -131,6 +132,7 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
             alt="Tablet frame"
             width={430}
             height={580}
+            fetchPriority="high"
           />
           <div className="screen">
             <img
@@ -151,6 +153,7 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
             alt="Mobile frame"
             width={280}
             height={560}
+            fetchPriority="high"
           />
           <div className="screen">
             <img
