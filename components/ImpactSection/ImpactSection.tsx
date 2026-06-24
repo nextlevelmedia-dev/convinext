@@ -72,7 +72,7 @@ export default function ImpactSection({
               ref={impactRef}
               className="font-black text-center leading-none select-none"
               style={{
-                fontSize: "clamp(60px, 22vw, 200px)",
+                fontSize: "clamp(60px, 28vw, 200px)",
                 background: "linear-gradient(to right, #fc03b0, #047cf9)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
