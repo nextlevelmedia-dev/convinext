@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo } from 'react'
 import './DeviceMockups.css'
 
 type MockupSlide = {
@@ -44,7 +44,6 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
 
     if (!imac || !tablet || !mobile) return
 
-    // Prima slide già nell'HTML — partiamo dalla seconda
     let index = 1
 
     const createTemp = (el: HTMLImageElement, src: string) => {
@@ -94,7 +93,6 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
       index = (index + 1) % safeSlides.length
     }
 
-    // Solo se ci sono più slide avvia il carousel
     if (safeSlides.length > 1) {
       const interval = setInterval(changeSlide, 2800)
       return () => clearInterval(interval)
@@ -109,8 +107,10 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
         <div className="device-mockup imac">
           <img
             className="frame"
-            src="https://staging2.next-level-media.it/wp-content/uploads/2025/12/ChatGPT-Image-14-nov-2025-14_49_12.webp"
+            src="/frame-imac.webp"
             alt="iMac frame"
+            width={620}
+            height={520}
           />
           <div className="screen">
             <img
@@ -118,6 +118,8 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
               src={firstSlide?.imac}
               alt="iMac screen"
               fetchPriority="high"
+              width={1280}
+              height={800}
             />
           </div>
         </div>
@@ -125,8 +127,10 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
         <div className="device-mockup tablet">
           <img
             className="frame"
-            src="https://staging2.next-level-media.it/wp-content/uploads/2025/12/Progetto-senza-titolo-2025-11-14T150911.729.webp"
+            src="/frame-tablet.webp"
             alt="Tablet frame"
+            width={430}
+            height={580}
           />
           <div className="screen">
             <img
@@ -134,6 +138,8 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
               src={firstSlide?.tablet}
               alt="Tablet screen"
               fetchPriority="high"
+              width={800}
+              height={600}
             />
           </div>
         </div>
@@ -141,8 +147,10 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
         <div className="device-mockup mobile">
           <img
             className="frame"
-            src="https://staging2.next-level-media.it/wp-content/uploads/2025/12/Progetto-senza-titolo-2025-11-14T150939.163.webp"
+            src="/frame-mobile.webp"
             alt="Mobile frame"
+            width={280}
+            height={560}
           />
           <div className="screen">
             <img
@@ -150,9 +158,12 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
               src={firstSlide?.mobile}
               alt="Mobile screen"
               fetchPriority="high"
+              width={390}
+              height={844}
             />
           </div>
         </div>
+
       </div>
     </div>
   )
