@@ -103,13 +103,15 @@ const query = `*[_type == "page" && slug.current == "ecommerce"][0]{
 export default async function EcommercePage() {
   const page = await client.fetch(query)
 
-  const mockupSlides = page?.mockupSlides
-    ?.filter((s: any) => s?.imac?.asset?.url && s?.tablet?.asset?.url && s?.mobile?.asset?.url)
-    .map((s: any) => ({
-      imac: s.imac.asset.url,
-      tablet: s.tablet.asset.url,
-      mobile: s.mobile.asset.url,
-    }))
+  import { urlFor } from "@/sanity/lib/image"
+
+const mockupSlides = page?.mockupSlides
+  ?.filter((s: any) => s?.imac?.asset && s?.tablet?.asset && s?.mobile?.asset)
+  .map((s: any) => ({
+    imac: urlFor(s.imac).width(1280).height(800).format("webp").url(),
+    tablet: urlFor(s.tablet).width(800).height(600).format("webp").url(),
+    mobile: urlFor(s.mobile).width(390).height(844).format("webp").url(),
+  }))
 
   return (
     <>
