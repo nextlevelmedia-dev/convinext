@@ -11,16 +11,28 @@ import FinalRecap from "@/components/FinalRecap/FinalRecap"
 import FaqSection from "@/components/FaqSection/FaqSection"
 import ContactSection from "@/components/ContactSection/ContactSection"
 import { client } from "@/sanity/lib/client"
-import { urlFor } from "@/sanity/lib/image"
+
+const sitiWebSlides = [
+  {
+    imac: '/mockups/siti-web-imac-1.webp',
+    tablet: '/mockups/siti-web-tablet-1.webp',
+    mobile: '/mockups/siti-web-mobile-1.webp',
+  },
+  {
+    imac: '/mockups/siti-web-imac-2.webp',
+    tablet: '/mockups/siti-web-tablet-2.webp',
+    mobile: '/mockups/siti-web-mobile-2.webp',
+  },
+  {
+    imac: '/mockups/siti-web-imac-3.webp',
+    tablet: '/mockups/siti-web-tablet-3.webp',
+    mobile: '/mockups/siti-web-mobile-3.webp',
+  },
+]
 
 async function getPageData() {
   const query = `*[_type == "page" && slug.current == "siti-web"][0]{
     hero,
-    mockupSlides[]{
-      imac{ asset->{ _id, url } },
-      tablet{ asset->{ _id, url } },
-      mobile{ asset->{ _id, url } }
-    },
     impactSection{
       titleHighlight,
       titleNormal,
@@ -108,14 +120,6 @@ async function getPageData() {
 export default async function SitiWebPage() {
   const data = await getPageData()
 
-  const mockupSlides = data?.mockupSlides
-  ?.filter((s: any) => s?.imac?.asset && s?.tablet?.asset && s?.mobile?.asset)
-  .map((s: any) => ({
-    imac: urlFor(s.imac).width(1280).height(800).format("webp").url(),
-    tablet: urlFor(s.tablet).width(800).height(600).format("webp").url(),
-    mobile: urlFor(s.mobile).width(390).height(844).format("webp").url(),
-  }))
-
   return (
     <>
       <Header />
@@ -128,7 +132,7 @@ export default async function SitiWebPage() {
           highlightTwo={data.hero.highlightTwo}
           subtitle={data.hero.subtitle}
           ctaText={data.hero.ctaText}
-          rightContent={<DeviceMockups slides={mockupSlides?.length ? mockupSlides : undefined} />}
+          rightContent={<DeviceMockups slides={sitiWebSlides} />}
         />
 
         <ImpactSection

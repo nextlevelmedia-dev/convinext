@@ -11,15 +11,42 @@ import FinalRecap from "@/components/FinalRecap/FinalRecap"
 import FaqSection from "@/components/FaqSection/FaqSection"
 import ContactSection from "@/components/ContactSection/ContactSection"
 import { client } from "@/sanity/lib/client"
-import { urlFor } from "@/sanity/lib/image"
+
+const ecommerceSlides = [
+  {
+    imac: '/mockups/ecommerce-imac-1.webp',
+    tablet: '/mockups/ecommerce-tablet-1.webp',
+    mobile: '/mockups/ecommerce-mobile-1.webp',
+  },
+  {
+    imac: '/mockups/ecommerce-imac-2.webp',
+    tablet: '/mockups/ecommerce-tablet-2.webp',
+    mobile: '/mockups/ecommerce-mobile-2.webp',
+  },
+  {
+    imac: '/mockups/ecommerce-imac-3.webp',
+    tablet: '/mockups/ecommerce-tablet-3.webp',
+    mobile: '/mockups/ecommerce-mobile-3.webp',
+  },
+  {
+    imac: '/mockups/ecommerce-imac-4.webp',
+    tablet: '/mockups/ecommerce-tablet-4.webp',
+    mobile: '/mockups/ecommerce-mobile-4.webp',
+  },
+  {
+    imac: '/mockups/ecommerce-imac-5.webp',
+    tablet: '/mockups/ecommerce-tablet-5.webp',
+    mobile: '/mockups/ecommerce-mobile-5.webp',
+  },
+  {
+    imac: '/mockups/ecommerce-imac-6.webp',
+    tablet: '/mockups/ecommerce-tablet-6.webp',
+    mobile: '/mockups/ecommerce-mobile-6.webp',
+  },
+]
 
 const query = `*[_type == "page" && slug.current == "ecommerce"][0]{
   hero,
-  mockupSlides[]{
-    imac{ asset->{ _id, url } },
-    tablet{ asset->{ _id, url } },
-    mobile{ asset->{ _id, url } }
-  },
   impactSection{
     titleHighlight,
     titleNormal,
@@ -104,21 +131,13 @@ const query = `*[_type == "page" && slug.current == "ecommerce"][0]{
 export default async function EcommercePage() {
   const page = await client.fetch(query)
 
-  const mockupSlides = page?.mockupSlides
-    ?.filter((s: any) => s?.imac?.asset && s?.tablet?.asset && s?.mobile?.asset)
-    .map((s: any) => ({
-      imac: urlFor(s.imac).width(1280).height(800).format("webp").url(),
-      tablet: urlFor(s.tablet).width(800).height(600).format("webp").url(),
-      mobile: urlFor(s.mobile).width(390).height(844).format("webp").url(),
-    }))
-
   return (
     <>
       <Header />
       <main>
         <Hero
           {...page?.hero}
-          rightContent={<DeviceMockups slides={mockupSlides?.length ? mockupSlides : undefined} />}
+          rightContent={<DeviceMockups slides={ecommerceSlides} />}
         />
 
         <ImpactSection
