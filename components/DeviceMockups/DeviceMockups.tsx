@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import './DeviceMockups.css'
 
 type MockupSlide = {
@@ -33,6 +33,7 @@ const defaultSlides: MockupSlide[] = [
 
 export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsProps) {
   const safeSlides = useMemo(() => slides.filter(Boolean), [slides])
+  const firstSlide = safeSlides[0]
 
   useEffect(() => {
     if (!safeSlides.length) return
@@ -43,8 +44,8 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
 
     if (!imac || !tablet || !mobile) return
 
-    let index = 0
-    let firstRun = true
+    // Prima slide già nell'HTML — partiamo dalla seconda
+    let index = 1
 
     const createTemp = (el: HTMLImageElement, src: string) => {
       const temp = document.createElement('img')
@@ -70,16 +71,6 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
     const changeSlide = () => {
       const slide = safeSlides[index]
 
-      if (firstRun) {
-        imac.src = slide.imac
-        tablet.src = slide.tablet
-        mobile.src = slide.mobile
-
-        firstRun = false
-        index = (index + 1) % safeSlides.length
-        return
-      }
-
       const tempImac = createTemp(imac, slide.imac)
       const tempTablet = createTemp(tablet, slide.tablet)
       const tempMobile = createTemp(mobile, slide.mobile)
@@ -103,12 +94,10 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
       index = (index + 1) % safeSlides.length
     }
 
-    changeSlide()
-
-    const interval = setInterval(changeSlide, 2800)
-
-    return () => {
-      clearInterval(interval)
+    // Solo se ci sono più slide avvia il carousel
+    if (safeSlides.length > 1) {
+      const interval = setInterval(changeSlide, 2800)
+      return () => clearInterval(interval)
     }
   }, [safeSlides])
 
@@ -124,7 +113,12 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
             alt="iMac frame"
           />
           <div className="screen">
-            <img className="screen-img imac-screen" alt="iMac screen" />
+            <img
+              className="screen-img imac-screen"
+              src={firstSlide?.imac}
+              alt="iMac screen"
+              fetchPriority="high"
+            />
           </div>
         </div>
 
@@ -135,7 +129,12 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
             alt="Tablet frame"
           />
           <div className="screen">
-            <img className="screen-img tablet-screen" alt="Tablet screen" />
+            <img
+              className="screen-img tablet-screen"
+              src={firstSlide?.tablet}
+              alt="Tablet screen"
+              fetchPriority="high"
+            />
           </div>
         </div>
 
@@ -146,7 +145,12 @@ export default function DeviceMockups({ slides = defaultSlides }: DeviceMockupsP
             alt="Mobile frame"
           />
           <div className="screen">
-            <img className="screen-img mobile-screen" alt="Mobile screen" />
+            <img
+              className="screen-img mobile-screen"
+              src={firstSlide?.mobile}
+              alt="Mobile screen"
+              fetchPriority="high"
+            />
           </div>
         </div>
       </div>

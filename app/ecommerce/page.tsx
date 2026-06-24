@@ -14,6 +14,11 @@ import { client } from "@/sanity/lib/client"
 
 const query = `*[_type == "page" && slug.current == "ecommerce"][0]{
   hero,
+  mockupSlides[]{
+    imac{ asset->{ _id, url } },
+    tablet{ asset->{ _id, url } },
+    mobile{ asset->{ _id, url } }
+  },
   impactSection{
     titleHighlight,
     titleNormal,
@@ -98,11 +103,22 @@ const query = `*[_type == "page" && slug.current == "ecommerce"][0]{
 export default async function EcommercePage() {
   const page = await client.fetch(query)
 
+  const mockupSlides = page?.mockupSlides
+    ?.filter((s: any) => s?.imac?.asset?.url && s?.tablet?.asset?.url && s?.mobile?.asset?.url)
+    .map((s: any) => ({
+      imac: s.imac.asset.url,
+      tablet: s.tablet.asset.url,
+      mobile: s.mobile.asset.url,
+    }))
+
   return (
     <>
       <Header />
       <main>
-        <Hero {...page?.hero} rightContent={<DeviceMockups />} />
+        <Hero
+          {...page?.hero}
+          rightContent={<DeviceMockups slides={mockupSlides?.length ? mockupSlides : undefined} />}
+        />
 
         <ImpactSection
           titleHighlight={page?.impactSection?.titleHighlight}

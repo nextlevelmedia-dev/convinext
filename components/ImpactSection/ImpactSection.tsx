@@ -80,7 +80,7 @@ export default function ImpactSection({
                 opacity: 0,
                 transform: "scale(1.3) translateY(60px)",
                 willChange: "transform, opacity",
-                transition: "transform 0.1s ease-out, opacity 0.1s ease-out",
+                transition: "none",
               }}
             >
               {impactText}

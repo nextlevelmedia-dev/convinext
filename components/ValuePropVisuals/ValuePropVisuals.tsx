@@ -92,9 +92,9 @@ function EcommercePerformanceVisual() {
         @keyframes perf-score { from{stroke-dashoffset:283} to{stroke-dashoffset:0} }
         @keyframes perf-glow { 0%,100%{filter:drop-shadow(0 0 6px #22c55e)} 50%{filter:drop-shadow(0 0 16px #22c55e)} }
         @keyframes perf-num { 0%{opacity:0;transform:scale(0.8)} 100%{opacity:1;transform:scale(1)} }
-        @keyframes perf-bar1 { from{width:0} to{width:75%} }
-        @keyframes perf-bar2 { from{width:0} to{width:93%} }
-        @keyframes perf-bar3 { from{width:0} to{width:88%} }
+        @keyframes perf-bar1 { from{width:0} to{width:150px} }
+        @keyframes perf-bar2 { from{width:0} to{width:186px} }
+        @keyframes perf-bar3 { from{width:0} to{width:176px} }
         .perf-circle { animation: perf-score 1.8s cubic-bezier(0.4,0,0.2,1) forwards 0.3s; stroke-dasharray:283; stroke-dashoffset:283; }
         .perf-glow { animation: perf-glow 2s ease-in-out infinite 2s; }
         .perf-num { animation: perf-num 0.5s ease forwards 1.8s; opacity:0; }
@@ -166,58 +166,68 @@ function EcommerceScalabileVisual() {
         <defs>
           <linearGradient id="sc-g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor={gradStart}/><stop offset="100%" stopColor={gradEnd}/></linearGradient>
         </defs>
-        <rect x="168" y="30" width="110" height="215" rx="20" fill="#0d1b38" stroke="rgba(255,255,255,0.1)" strokeWidth="1.5"/>
-        <rect x="168" y="30" width="110" height="215" rx="20" fill="none" stroke="url(#sc-g1)" strokeWidth="1.5" opacity="0.35"/>
-        <rect x="200" y="38" width="46" height="8" rx="4" fill="rgba(0,0,0,0.6)"/>
-        <text x="223" y="90" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.3)">Monday, June 5</text>
-        <text x="223" y="115" textAnchor="middle" fontSize="28" fontWeight="200" fill="white">9:41</text>
-        <rect x="186" y="130" width="74" height="0.5" fill="rgba(255,255,255,0.1)"/>
+
+        {/* iPhone più grande e centrato */}
+        <rect x="185" y="18" width="150" height="284" rx="26" fill="#0d1b38" stroke="rgba(255,255,255,0.1)" strokeWidth="1.5"/>
+        <rect x="185" y="18" width="150" height="284" rx="26" fill="none" stroke="url(#sc-g1)" strokeWidth="1.5" opacity="0.35"/>
+        <rect x="228" y="26" width="64" height="10" rx="5" fill="rgba(0,0,0,0.6)"/>
+
+        {/* Ora e data */}
+        <text x="260" y="72" textAnchor="middle" fontSize="10" fill="rgba(255,255,255,0.3)">Monday, June 5</text>
+        <text x="260" y="102" textAnchor="middle" fontSize="36" fontWeight="200" fill="white">9:41</text>
+        <rect x="196" y="115" width="128" height="0.5" fill="rgba(255,255,255,0.1)"/>
+
+        {/* Notifiche con icona borsa verde */}
         <g className="sc-notify1">
-          <rect x="178" y="138" width="90" height="38" rx="10" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.08)" strokeWidth="1"/>
-          <circle cx="192" cy="152" r="7" fill="url(#sc-g1)"/>
-          <text x="192" y="156" textAnchor="middle" fontSize="8" fill="white">🛍</text>
-          <rect x="204" y="145" width="50" height="5" rx="2.5" fill="rgba(255,255,255,0.5)"/>
-          <rect x="204" y="155" width="35" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
-          <text x="255" y="150" textAnchor="end" fontSize="7" fill="rgba(252,3,176,0.9)" fontWeight="700">now</text>
+  <rect x="196" y="124" width="128" height="44" rx="12" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.08)" strokeWidth="1"/>
+  <rect x="206" y="134" width="22" height="22" rx="6" fill="#96BF48"/>
+  <text x="217" y="150" textAnchor="middle" fontSize="12" fill="white">🛍</text>
+  <rect x="234" y="132" width="68" height="6" rx="3" fill="rgba(255,255,255,0.5)"/>
+  <rect x="234" y="143" width="48" height="5" rx="2" fill="rgba(255,255,255,0.25)"/>
+  <text x="316" y="138" textAnchor="end" fontSize="8" fill="rgba(252,3,176,0.9)" fontWeight="700">now</text>
+  <text x="234" y="158" fontSize="7" fill="rgba(255,255,255,0.4)">Nuovo ordine ricevuto</text>
+</g>
+
+<g className="sc-notify2">
+  <rect x="196" y="180" width="128" height="44" rx="12" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.08)" strokeWidth="1"/>
+  <rect x="206" y="190" width="22" height="22" rx="6" fill="#96BF48"/>
+  <text x="217" y="206" textAnchor="middle" fontSize="12" fill="white">💳</text>
+  <rect x="234" y="188" width="56" height="6" rx="3" fill="rgba(255,255,255,0.5)"/>
+  <rect x="234" y="199" width="40" height="5" rx="2" fill="rgba(255,255,255,0.25)"/>
+  <text x="316" y="194" textAnchor="end" fontSize="8" fill="rgba(252,3,176,0.9)" fontWeight="700">now</text>
+  <text x="234" y="214" fontSize="7" fill="rgba(255,255,255,0.4)">Pagamento confermato</text>
+</g>
+
+<g className="sc-notify3">
+  <rect x="196" y="236" width="128" height="44" rx="12" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.08)" strokeWidth="1"/>
+  <rect x="206" y="246" width="22" height="22" rx="6" fill="#96BF48"/>
+  <text x="217" y="262" textAnchor="middle" fontSize="12" fill="white">📦</text>
+  <rect x="234" y="244" width="74" height="6" rx="3" fill="rgba(255,255,255,0.5)"/>
+  <rect x="234" y="255" width="52" height="5" rx="2" fill="rgba(255,255,255,0.25)"/>
+  <text x="316" y="250" textAnchor="end" fontSize="8" fill="rgba(252,3,176,0.9)" fontWeight="700">now</text>
+  <text x="234" y="270" fontSize="7" fill="rgba(255,255,255,0.4)">Ordine spedito</text>
+</g>
+
+        {/* Home indicator */}
+        <rect x="232" y="290" width="56" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+
+        {/* Card ORDINI OGGI */}
+        <g transform="translate(30,80)">
+          <rect x="0" y="0" width="120" height="64" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.07)" strokeWidth="1"/>
+          <text x="14" y="22" fontSize="9" fill="rgba(255,255,255,0.35)">ORDINI OGGI</text>
+          <g className="sc-count"><text x="14" y="48" fontSize="28" fontWeight="900" fill="white">247</text></g>
+          <circle cx="100" cy="18" r="6" fill="rgba(34,197,94,0.3)" stroke="rgba(34,197,94,0.6)" strokeWidth="1"/>
+          <circle className="sc-dot" cx="100" cy="18" r="4" fill="#22c55e"/>
         </g>
-        <g className="sc-notify2">
-          <rect x="178" y="150" width="90" height="38" rx="10" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.08)" strokeWidth="1"/>
-          <circle cx="192" cy="164" r="7" fill="url(#sc-g1)"/>
-          <text x="192" y="168" textAnchor="middle" fontSize="8" fill="white">💳</text>
-          <rect x="204" y="157" width="42" height="5" rx="2.5" fill="rgba(255,255,255,0.5)"/>
-          <rect x="204" y="167" width="30" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
-          <text x="255" y="162" textAnchor="end" fontSize="7" fill="rgba(252,3,176,0.9)" fontWeight="700">now</text>
+
+        {/* Card REVENUE */}
+        <g transform="translate(370,80)">
+          <rect x="0" y="0" width="120" height="64" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.07)" strokeWidth="1"/>
+          <text x="14" y="22" fontSize="9" fill="rgba(255,255,255,0.35)">REVENUE</text>
+          <text x="14" y="48" fontSize="24" fontWeight="900" fill="white">€32k</text>
+          <text x="14" y="62" fontSize="9" fill="#22c55e" fontWeight="700">↑ +18%</text>
         </g>
-        <g className="sc-notify3">
-          <rect x="178" y="162" width="90" height="38" rx="10" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.08)" strokeWidth="1"/>
-          <circle cx="192" cy="176" r="7" fill="url(#sc-g1)"/>
-          <text x="192" y="180" textAnchor="middle" fontSize="8" fill="white">📦</text>
-          <rect x="204" y="169" width="56" height="5" rx="2.5" fill="rgba(255,255,255,0.5)"/>
-          <rect x="204" y="179" width="38" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
-          <text x="255" y="174" textAnchor="end" fontSize="7" fill="rgba(252,3,176,0.9)" fontWeight="700">now</text>
-        </g>
-        <rect x="200" y="232" width="46" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
-        <g transform="translate(52,80)">
-          <rect x="0" y="0" width="96" height="54" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.07)" strokeWidth="1"/>
-          <text x="12" y="20" fontSize="8" fill="rgba(255,255,255,0.35)">ORDINI OGGI</text>
-          <g className="sc-count"><text x="12" y="40" fontSize="22" fontWeight="900" fill="white">247</text></g>
-          <circle cx="80" cy="16" r="5" fill="rgba(34,197,94,0.3)" stroke="rgba(34,197,94,0.6)" strokeWidth="1"/>
-          <circle className="sc-dot" cx="80" cy="16" r="3" fill="#22c55e"/>
-        </g>
-        <g transform="translate(372,80)">
-          <rect x="0" y="0" width="96" height="54" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.07)" strokeWidth="1"/>
-          <text x="12" y="20" fontSize="8" fill="rgba(255,255,255,0.35)">REVENUE</text>
-          <text x="12" y="40" fontSize="18" fontWeight="900" fill="white">€32k</text>
-          <text x="12" y="52" fontSize="8" fill="#22c55e" fontWeight="700">↑ +18%</text>
-        </g>
-        <rect x="52" y="210" width="416" height="52" rx="14" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" strokeWidth="1"/>
-        <text x="80" y="241" fontSize="10" fill="rgba(255,255,255,0.35)">Catalogo</text>
-        <text x="180" y="241" fontSize="10" fill="rgba(255,255,255,0.35)">Pagamenti</text>
-        <text x="280" y="241" fontSize="10" fill="rgba(255,255,255,0.35)">Spedizioni</text>
-        <text x="380" y="241" fontSize="10" fill="rgba(255,255,255,0.35)">Analytics</text>
-        {[68,168,268,368].map((x,i)=>(
-          <rect key={i} x={x} y="248" width="30" height="3" rx="1.5" fill="url(#sc-g1)" opacity={i===0?1:0.3}/>
-        ))}
+
       </svg>
     </div>
   )

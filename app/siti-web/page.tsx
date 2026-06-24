@@ -11,33 +11,16 @@ import FinalRecap from "@/components/FinalRecap/FinalRecap"
 import FaqSection from "@/components/FaqSection/FaqSection"
 import ContactSection from "@/components/ContactSection/ContactSection"
 import { client } from "@/sanity/lib/client"
-
-const sitiWebSlides = [
-  {
-    imac: "https://staging2.next-level-media.it/wp-content/uploads/2025/12/mockup-imac-hero-next-10.webp",
-    tablet: "https://staging2.next-level-media.it/wp-content/uploads/2025/12/mockup-tablet-next-hero-1264-x-856-px-9.webp",
-    mobile: "https://staging2.next-level-media.it/wp-content/uploads/2025/12/mockup-iphone-next-hero-9.webp",
-  },
-  {
-    imac: "https://staging2.next-level-media.it/wp-content/uploads/2025/12/mockup-imac-hero-next-6.webp",
-    tablet: "https://staging2.next-level-media.it/wp-content/uploads/2025/12/mockup-tablet-next-hero-1264-x-856-px-6.webp",
-    mobile: "https://staging2.next-level-media.it/wp-content/uploads/2025/12/mockup-iphone-next-hero-6.webp",
-  },
-  {
-    imac: "https://staging2.next-level-media.it/wp-content/uploads/2025/12/mockup-imac-hero-next-2.webp",
-    tablet: "https://staging2.next-level-media.it/wp-content/uploads/2025/12/mockup-tablet-next-hero-1264-x-856-px-2.webp",
-    mobile: "https://staging2.next-level-media.it/wp-content/uploads/2025/12/mockup-iphone-next-hero-2.webp",
-  },
-  {
-    imac: "https://staging2.next-level-media.it/wp-content/uploads/2025/12/mockup-imac-hero-next-7.webp",
-    tablet: "https://staging2.next-level-media.it/wp-content/uploads/2025/12/mockup-imac-hero-next-8.webp",
-    mobile: "https://staging2.next-level-media.it/wp-content/uploads/2025/12/mockup-iphone-next-hero-7.webp",
-  },
-]
+import { urlFor } from "@/sanity/lib/image"
 
 async function getPageData() {
   const query = `*[_type == "page" && slug.current == "siti-web"][0]{
     hero,
+    mockupSlides[]{
+      imac{ asset->{ _id, url } },
+      tablet{ asset->{ _id, url } },
+      mobile{ asset->{ _id, url } }
+    },
     impactSection{
       titleHighlight,
       titleNormal,
@@ -125,6 +108,14 @@ async function getPageData() {
 export default async function SitiWebPage() {
   const data = await getPageData()
 
+  const mockupSlides = data?.mockupSlides
+    ?.filter((s: any) => s?.imac?.asset?.url && s?.tablet?.asset?.url && s?.mobile?.asset?.url)
+    .map((s: any) => ({
+      imac: s.imac.asset.url,
+      tablet: s.tablet.asset.url,
+      mobile: s.mobile.asset.url,
+    }))
+
   return (
     <>
       <Header />
@@ -137,7 +128,7 @@ export default async function SitiWebPage() {
           highlightTwo={data.hero.highlightTwo}
           subtitle={data.hero.subtitle}
           ctaText={data.hero.ctaText}
-          rightContent={<DeviceMockups slides={sitiWebSlides} />}
+          rightContent={<DeviceMockups slides={mockupSlides?.length ? mockupSlides : undefined} />}
         />
 
         <ImpactSection
