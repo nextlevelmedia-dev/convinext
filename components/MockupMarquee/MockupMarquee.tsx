@@ -61,8 +61,8 @@ function MarqueeRow({
     const handleScroll = () => {
       const rect = el.getBoundingClientRect()
       const windowHeight = window.innerHeight
-      const triggerPoint = windowHeight * 0.5
-      const startPoint = windowHeight
+      const triggerPoint = windowHeight * 0.8
+const startPoint = windowHeight * 1.1
       const progress = Math.max(0, Math.min(1, (startPoint - rect.top) / (startPoint - triggerPoint)))
 
       const opacity = progress
